@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import axios from "axios";
 import IssueListItem from "../../components/IssueListItem";
 import { Issue } from "../../types/issue";
+import { getIssues } from "../../services/issueApi";
 
 export default function IssuesList(): JSX.Element {
   const [issues, setIssues] = useState<Issue[]>([]);
   const { labId } = useParams();
 
   const loadIssues = async (): Promise<void> => {
-    const loadedIssues: Issue[] = (
-      await axios.get(`http://localhost:8000/api/dev/labs/${labId}/issues/`)
-    ).data;
-    setIssues(loadedIssues);
+    setIssues(await getIssues(labId));
   };
 
   useEffect(() => {

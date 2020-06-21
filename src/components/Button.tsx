@@ -9,7 +9,8 @@ const buttonStyle = (color: ButtonColor) => css`
   border: solid ${color.defaultBorder} 1px;
   font-size: 90%;
   color: ${color.isDark ? "#fafafa" : "#212121"};
-  box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.5), #e8e8e8 0 2px;
+  box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.5),
+    rgba(80, 80, 80, 0.1) 0 2px;
   transition: box-shadow 100ms ease-out;
 
   &:hover:enabled {
@@ -47,7 +48,7 @@ interface ButtonColor {
 export const ButtonColors: Record<string, ButtonColor> = {
   white: {
     default: "#fdfdfd",
-    defaultBorder: "#d8d8d8",
+    defaultBorder: "#d0d0d0",
     hover: "#f0f0f0",
     hoverBorder: "#c8c8c8",
     active: "#e2e2e2",
@@ -62,6 +63,16 @@ export const ButtonColors: Record<string, ButtonColor> = {
     active: "#21aa43",
     activeBorder: "#1f933c",
     disabled: "#82c79b",
+    isDark: true,
+  },
+  red: {
+    default: "#d02121",
+    defaultBorder: "#ba2121",
+    hover: "#c42222",
+    hoverBorder: "#a12020",
+    active: "#aa2121",
+    activeBorder: "#931f1f",
+    disabled: "#c78282",
     isDark: true,
   },
 };

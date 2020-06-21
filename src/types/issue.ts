@@ -6,6 +6,12 @@ export interface Issue {
   created: string;
 }
 
+export interface IssueEdits {
+  state?: IssueState;
+  title?: string;
+  description?: string;
+}
+
 export enum IssueState {
   OPEN = "OPEN",
   CLOSED = "CLOSED",

@@ -2,12 +2,24 @@
 import { css, jsx } from "@emotion/core";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Issue } from "../../../types/issue";
+import { Issue, IssueEdits } from "../../../types/issue";
 import IssueStateIndicator from "../../../components/IssueStateIndicator";
 import Page from "../../../components/Page";
-import PlaintextEditor from "../../../components/MarkdownEditor";
-import Button from "../../../components/Button";
+import PlaintextEditor from "../../../components/PlaintextEditor";
+import Button, { ButtonColors } from "../../../components/Button";
+import { getIssue, updateIssue } from "../../../services/issueApi";
+
+const issueTitleInputStyle = css`
+  background: none;
+  border: 1px solid #ccc;
+  font-size: x-large;
+  border-radius: 4px;
+  margin: 15px 0;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  box-shadow: rgba(80, 80, 80, 0.1) 0 2px;
+  padding: 4px 12px;
+`;
 
 const issueHeadingContainerStyle = css`
   display: flex;
@@ -21,6 +33,12 @@ const issueSubheadingContainerStyle = css`
   border-bottom: solid #ccc 1px;
 `;
 
+const editButtonsContainerStyle = css`
+  button {
+    margin-left: 8px;
+  }
+`;
+
 const issueSubheadingExtraInfoStyle = css`
   margin-left: 8px;
 `;
@@ -28,14 +46,26 @@ const issueSubheadingExtraInfoStyle = css`
 export default function LabIssuePage(): JSX.Element {
   const { labId, issueNumber } = useParams();
   const [issue, setIssue] = useState<Issue>();
+  const [issueEdits, setIssueEdits] = useState<IssueEdits>();
+  const editing = issueEdits !== undefined;
+
+  const toggleEditing = async () => {
+    if (!editing) {
+      setIssueEdits({});
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (Object.keys(issueEdits as any).length > 0) {
+      const updatedIssue = await updateIssue(labId, issueNumber, issueEdits);
+      setIssue(updatedIssue);
+    }
+
+    setIssueEdits(undefined);
+  };
 
   const loadIssue = async (): Promise<void> => {
-    const loadedIssue: Issue = (
-      await axios.get(
-        `http://localhost:8000/api/dev/labs/${labId}/issues/${issueNumber}`
-      )
-    ).data;
-    setIssue(loadedIssue);
+    setIssue(await getIssue(labId, issueNumber));
   };
 
   useEffect(() => {
@@ -48,8 +78,35 @@ export default function LabIssuePage(): JSX.Element {
       {issue && (
         <div>
           <div css={issueHeadingContainerStyle}>
-            <h2>{issue.title}</h2>
-            <Button onClick={() => null}>Edit</Button>
+            {editing ? (
+              <input
+                type="text"
+                css={issueTitleInputStyle}
+                value={issueEdits?.title || issue.title}
+                onChange={({ target: { value: title } }) =>
+                  title !== issue.title &&
+                  setIssueEdits({ ...issueEdits, title })
+                }
+              />
+            ) : (
+              <h2>{issue.title}</h2>
+            )}
+            <div css={editButtonsContainerStyle}>
+              <Button
+                onClick={() => toggleEditing()}
+                color={editing ? ButtonColors.green : undefined}
+              >
+                {editing ? "Save" : "Edit"}
+              </Button>
+              {editing && (
+                <Button
+                  color={ButtonColors.red}
+                  onClick={() => setIssueEdits(undefined)}
+                >
+                  Cancel
+                </Button>
+              )}
+            </div>
           </div>
           <div css={issueSubheadingContainerStyle}>
             <IssueStateIndicator state={issue.state} />
@@ -57,8 +114,16 @@ export default function LabIssuePage(): JSX.Element {
               Created {new Date(issue.created).toDateString()}
             </span>
           </div>
-          <p>{issue.description}</p>
-          <PlaintextEditor />
+          {editing ? (
+            <PlaintextEditor
+              value={issueEdits?.description || issue.description}
+              onChange={(description) =>
+                setIssueEdits({ ...issueEdits, description })
+              }
+            />
+          ) : (
+            <p>{issue.description}</p>
+          )}
         </div>
       )}
     </Page>
