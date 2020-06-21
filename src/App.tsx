@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
-import LabRoutes from "./views/Lab/LabRoutes";
+import LabRoutes from "./pages/Lab/LabRoutes";
 
 export default function App(): JSX.Element {
   return (
