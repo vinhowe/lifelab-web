@@ -33,6 +33,7 @@ const editButtonsContainerStyle = css`
 
 const issueSubheadingExtraInfoStyle = css`
   margin-left: 8px;
+  color: rgba(0, 0, 0, 0.6);
 `;
 
 export default function LabIssuePage(): JSX.Element {
