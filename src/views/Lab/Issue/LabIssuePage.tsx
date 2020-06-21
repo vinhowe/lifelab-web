@@ -8,18 +8,7 @@ import Page from "../../../components/Page";
 import PlaintextEditor from "../../../components/PlaintextEditor";
 import Button, { ButtonColors } from "../../../components/Button";
 import { getIssue, updateIssue } from "../../../services/issueApi";
-
-const issueTitleInputStyle = css`
-  background: none;
-  border: 1px solid #ccc;
-  font-size: x-large;
-  border-radius: 4px;
-  margin: 15px 0;
-  font-family: "Lato", sans-serif;
-  font-weight: bold;
-  box-shadow: rgba(80, 80, 80, 0.1) 0 2px;
-  padding: 4px 12px;
-`;
+import TextField from "../../../components/TextField";
 
 const issueHeadingContainerStyle = css`
   display: flex;
@@ -34,6 +23,7 @@ const issueSubheadingContainerStyle = css`
 `;
 
 const editButtonsContainerStyle = css`
+  flex: max-content;
   button {
     margin-left: 8px;
   }
@@ -79,11 +69,10 @@ export default function LabIssuePage(): JSX.Element {
         <div>
           <div css={issueHeadingContainerStyle}>
             {editing ? (
-              <input
-                type="text"
-                css={issueTitleInputStyle}
+              <TextField
                 value={issueEdits?.title || issue.title}
-                onChange={({ target: { value: title } }) =>
+                style={{ width: "70%" }}
+                onChange={(title) =>
                   title !== issue.title &&
                   setIssueEdits({ ...issueEdits, title })
                 }
@@ -107,7 +96,9 @@ export default function LabIssuePage(): JSX.Element {
                 </Button>
               </div>
             ) : (
-              <Button onClick={() => toggleEditing()}>Edit</Button>
+              <div css={editButtonsContainerStyle}>
+                <Button onClick={() => toggleEditing()}>Edit</Button>
+              </div>
             )}
           </div>
           <div css={issueSubheadingContainerStyle}>
