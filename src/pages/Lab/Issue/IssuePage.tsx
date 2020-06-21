@@ -18,6 +18,11 @@ const issueHeadingContainerStyle = css`
   align-items: center;
 `;
 
+const issueNumberStyle = css`
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: normal;
+`;
+
 const issueSubheadingContainerStyle = css`
   margin-bottom: 24px;
   padding-bottom: 24px;
@@ -36,7 +41,7 @@ const issueSubheadingExtraInfoStyle = css`
   color: rgba(0, 0, 0, 0.6);
 `;
 
-export default function LabIssuePage(): JSX.Element {
+export default function IssuePage(): JSX.Element {
   const { labId, issueNumber } = useParams();
   const [issue, setIssue] = useState<Issue>();
   const [issueEdits, setIssueEdits] = useState<IssueEdits>();
@@ -81,7 +86,10 @@ export default function LabIssuePage(): JSX.Element {
                 }
               />
             ) : (
-              <h2>{issue.title}</h2>
+              <h1>
+                <span css={issueNumberStyle}>#{issue.number}</span>
+                {" "}{issue.title}
+              </h1>
             )}
             {editing ? (
               <div css={editButtonsContainerStyle}>

@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, BrowserRouter, Switch, useRouteMatch } from "react-router-dom";
 import LabPage from "./LabPage";
-import LabIssuePage from "./Issue/LabIssuePage";
+import IssuePage from "./Issue/IssuePage";
 
 export default function LabRoutes(): JSX.Element {
-  const { url, path } = useRouteMatch();
+  const { path } = useRouteMatch();
   return (
     <BrowserRouter>
       <Switch>
@@ -12,7 +12,7 @@ export default function LabRoutes(): JSX.Element {
           <LabPage />
         </Route>
         <Route path={`${path}/:labId/issues/:issueNumber`}>
-          <LabIssuePage />
+          <IssuePage />
         </Route>
       </Switch>
     </BrowserRouter>
