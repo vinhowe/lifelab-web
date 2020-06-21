@@ -91,22 +91,24 @@ export default function LabIssuePage(): JSX.Element {
             ) : (
               <h2>{issue.title}</h2>
             )}
-            <div css={editButtonsContainerStyle}>
-              <Button
-                onClick={() => toggleEditing()}
-                color={editing ? ButtonColors.green : undefined}
-              >
-                {editing ? "Save" : "Edit"}
-              </Button>
-              {editing && (
+            {editing ? (
+              <div css={editButtonsContainerStyle}>
                 <Button
                   color={ButtonColors.red}
                   onClick={() => setIssueEdits(undefined)}
                 >
                   Cancel
                 </Button>
-              )}
-            </div>
+                <Button
+                  onClick={() => toggleEditing()}
+                  color={ButtonColors.green}
+                >
+                  Save
+                </Button>
+              </div>
+            ) : (
+              <Button onClick={() => toggleEditing()}>Edit</Button>
+            )}
           </div>
           <div css={issueSubheadingContainerStyle}>
             <IssueStateIndicator state={issue.state} />
@@ -120,6 +122,7 @@ export default function LabIssuePage(): JSX.Element {
               onChange={(description) =>
                 setIssueEdits({ ...issueEdits, description })
               }
+              autoFocus
             />
           ) : (
             <p>{issue.description}</p>

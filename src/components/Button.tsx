@@ -11,7 +11,8 @@ const buttonStyle = (color: ButtonColor) => css`
   color: ${color.isDark ? "#fafafa" : "#212121"};
   box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.5),
     rgba(80, 80, 80, 0.1) 0 2px;
-  transition: box-shadow 100ms ease-out;
+  transition: all 60ms ease-out;
+  outline: none;
 
   &:hover:enabled {
     cursor: pointer;
@@ -24,6 +25,13 @@ const buttonStyle = (color: ButtonColor) => css`
     box-shadow: none;
     background: ${color.active};
     border-color: ${color.activeBorder};
+    outline: none;
+  }
+
+  &:focus:enabled:not(:active) {
+    outline: none;
+    box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.5),
+      0 0 0 4px rgba(43, 222, 255, 0.4);
   }
 
   &:disabled {

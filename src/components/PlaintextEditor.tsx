@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useEffect, useMemo, useState } from "react";
-import { Editable, Slate, withReact } from "slate-react";
+import { Editable, ReactEditor, Slate, withReact } from "slate-react";
 import { createEditor, Node } from "slate";
 import { withHistory } from "slate-history";
 
@@ -27,12 +27,23 @@ const serialize = (nodes: Node[]) => {
 export default function PlaintextEditor({
   value,
   onChange,
+  autoFocus = false,
 }: {
   value: string;
   onChange: (value: string) => void;
+  autoFocus?: boolean;
 }) {
   const [internalValue, setInternalValue] = useState<Node[]>([]);
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const editor: ReactEditor = useMemo(
+    () => withHistory(withReact(createEditor())),
+    []
+  );
+
+  useEffect(() => {
+    if (autoFocus && !!editor) {
+      ReactEditor.focus(editor);
+    }
+  }, [editor]);
 
   useEffect(() => {
     setInternalValue(deserialize(value));
@@ -50,13 +61,11 @@ export default function PlaintextEditor({
 
   return (
     <Slate editor={editor} value={internalValue} onChange={onChangeHandler}>
-      <Editable placeholder="Start writing..." css={editorStyle} />
+      <Editable
+        placeholder="Start writing..."
+        css={editorStyle}
+        autoFocus={autoFocus}
+      />
     </Slate>
   );
 }
-
-const initialState: Node[] = [
-  {
-    children: [{ text: "" }],
-  },
-];
