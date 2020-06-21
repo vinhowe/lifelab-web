@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { useEffect, useMemo, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useState } from "react";
 import { Editable, ReactEditor, Slate, withReact } from "slate-react";
 import { createEditor, Node, Editor, Transforms } from "slate";
 import { withHistory } from "slate-history";
@@ -12,7 +12,6 @@ const editorStyle = css`
   padding: 16px;
   font-size: 80%;
   font-family: "Jetbrains Mono", monospace;
-  box-shadow: rgba(80, 80, 80, 0.1) 0 2px;
   transition: all 60ms ease-out;
 
   &:active {
@@ -35,15 +34,19 @@ const serialize = (nodes: Node[]) => {
   return nodes.map((n) => Node.string(n)).join("\n");
 };
 
-export default function PlaintextEditor({
-  value,
-  onChange,
-  autoFocus = false,
-}: {
+export interface PlaintextEditorProps {
   value: string;
   onChange: (value: string) => void;
   autoFocus?: boolean;
-}) {
+  style?: CSSProperties;
+}
+
+export default function PlaintextEditor({
+  value,
+  onChange,
+  style,
+  autoFocus = false,
+}: PlaintextEditorProps): JSX.Element {
   const [internalValue, setInternalValue] = useState<Node[]>([]);
   const editor: ReactEditor = useMemo(
     () => withHistory(withReact(createEditor())),
@@ -80,6 +83,7 @@ export default function PlaintextEditor({
       <Editable
         placeholder="Start writing..."
         css={editorStyle}
+        style={style}
         autoFocus={autoFocus}
       />
     </Slate>

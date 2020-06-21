@@ -8,12 +8,13 @@ const buttonStyle = (color: ButtonColor) => css`
   padding: 6px 10px;
   border-radius: 4px;
   border: solid ${color.defaultBorder} 1px;
-  font-size: 90%;
+  font-size: 80%;
   color: ${color.isDark ? "#fafafa" : "#212121"};
-  box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.5),
+  box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.3),
     rgba(80, 80, 80, 0.1) 0 2px;
   transition: all 60ms ease-out;
   outline: none;
+  font-weight: bold;
 
   &:hover:enabled {
     cursor: pointer;

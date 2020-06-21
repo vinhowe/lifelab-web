@@ -9,6 +9,8 @@ import PlaintextEditor from "../../../components/PlaintextEditor";
 import Button, { ButtonColors } from "../../../components/Button";
 import { getIssue, updateIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
+import ReactMarkdown from "react-markdown";
+import EditPreview from "../../../components/EditPreview/EditPreview";
 
 const issueHeadingContainerStyle = css`
   display: flex;
@@ -108,7 +110,7 @@ export default function LabIssuePage(): JSX.Element {
             </span>
           </div>
           {editing ? (
-            <PlaintextEditor
+            <EditPreview
               value={issueEdits?.description || issue.description}
               onChange={(description) =>
                 setIssueEdits({ ...issueEdits, description })
@@ -116,7 +118,7 @@ export default function LabIssuePage(): JSX.Element {
               autoFocus
             />
           ) : (
-            <p>{issue.description}</p>
+            <ReactMarkdown>{issue.description}</ReactMarkdown>
           )}
         </div>
       )}
