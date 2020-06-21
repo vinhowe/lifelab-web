@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import { useEffect, useMemo, useState } from "react";
 import { Editable, ReactEditor, Slate, withReact } from "slate-react";
-import { createEditor, Node } from "slate";
+import { createEditor, Node, Editor, Transforms } from "slate";
 import { withHistory } from "slate-history";
 import { colors } from "../theme/theme";
 
@@ -51,10 +51,15 @@ export default function PlaintextEditor({
   );
 
   useEffect(() => {
-    if (autoFocus && !!editor) {
-      ReactEditor.focus(editor);
+    if (
+      autoFocus &&
+      editor &&
+      internalValue.length > 0 &&
+      !editor?.selection?.focus
+    ) {
+      Transforms.select(editor, Editor.start(editor, []));
     }
-  }, [editor]);
+  }, [editor, internalValue]);
 
   useEffect(() => {
     setInternalValue(deserialize(value));
