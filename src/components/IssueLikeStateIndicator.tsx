@@ -28,7 +28,7 @@ interface IssueLikeStateIndicatorProps {
 }
 
 export enum IssueLikeStateColor {
-  UNRESOLVED = "#22BB22",
+  UNRESOLVED = "#22c44a",
   IN_PROGRESS = "orange",
   FINISHED = "#BB2222",
 }

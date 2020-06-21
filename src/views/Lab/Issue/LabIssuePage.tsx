@@ -6,8 +6,16 @@ import axios from "axios";
 import { Issue } from "../../../types/issue";
 import IssueStateIndicator from "../../../components/IssueStateIndicator";
 import Page from "../../../components/Page";
+import PlaintextEditor from "../../../components/MarkdownEditor";
+import Button from "../../../components/Button";
 
-const issueSubheadingContainerInfoStyle = css`
+const issueHeadingContainerStyle = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const issueSubheadingContainerStyle = css`
   margin-bottom: 24px;
   padding-bottom: 24px;
   border-bottom: solid #ccc 1px;
@@ -39,16 +47,18 @@ export default function LabIssuePage(): JSX.Element {
     <Page>
       {issue && (
         <div>
-          <h2>
-            <span>{issue.title}</span>
-          </h2>
-          <div css={issueSubheadingContainerInfoStyle}>
+          <div css={issueHeadingContainerStyle}>
+            <h2>{issue.title}</h2>
+            <Button onClick={() => null}>Edit</Button>
+          </div>
+          <div css={issueSubheadingContainerStyle}>
             <IssueStateIndicator state={issue.state} />
             <span css={issueSubheadingExtraInfoStyle}>
               Created {new Date(issue.created).toDateString()}
             </span>
           </div>
           <p>{issue.description}</p>
+          <PlaintextEditor />
         </div>
       )}
     </Page>
