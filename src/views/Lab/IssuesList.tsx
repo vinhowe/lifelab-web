@@ -5,16 +5,13 @@ import IssueListItem from "../../components/IssueListItem";
 import { Issue } from "../../types/issue";
 
 export default function IssuesList(): JSX.Element {
-  const [issues, setIssues]: [Issue[], any] = useState([]);
+  const [issues, setIssues] = useState<Issue[]>([]);
   const { labId } = useParams();
 
   const loadIssues = async (): Promise<void> => {
-    const issueUrls: string[] = (
-      await axios.get(`http://localhost:8000/api/dev/labs/${labId}`)
-    ).data.issues;
-    const loadedIssues: Issue[] = await Promise.all(
-      issueUrls.map(async (url) => (await axios.get(url)).data)
-    );
+    const loadedIssues: Issue[] = (
+      await axios.get(`http://localhost:8000/api/dev/labs/${labId}/issues/`)
+    ).data;
     setIssues(loadedIssues);
   };
 
@@ -27,7 +24,7 @@ export default function IssuesList(): JSX.Element {
       <h1>Issues</h1>
       {issues.length > 0 &&
         issues.map((issue, index) => (
-          <IssueListItem key={index} issue={issue} />
+          <IssueListItem key={index} issue={issue} labId={labId} />
         ))}
     </div>
   );

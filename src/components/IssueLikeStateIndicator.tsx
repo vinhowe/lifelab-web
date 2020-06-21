@@ -6,8 +6,6 @@ import React from "react";
 const indicatorStyle = css`
   padding: 6px;
   border-radius: 4px;
-  margin: 0 4px;
-  font-size: 12px;
   font-weight: bold;
   color: #fafafa;
 `;
@@ -18,9 +16,9 @@ export default function IssueLikeStateIndicator({
 }: IssueLikeStateIndicatorProps): JSX.Element {
   const formattedState = uppercaseFirst(state);
   return (
-    <div css={indicatorStyle} style={{ backgroundColor: color }}>
+    <span css={indicatorStyle} style={{ backgroundColor: color }}>
       {formattedState}
-    </div>
+    </span>
   );
 }
 
@@ -30,7 +28,7 @@ interface IssueLikeStateIndicatorProps {
 }
 
 export enum IssueLikeStateColor {
-  UNRESOLVED = "green",
+  UNRESOLVED = "#22BB22",
   IN_PROGRESS = "orange",
-  FINISHED = "red",
+  FINISHED = "#BB2222",
 }

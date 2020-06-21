@@ -3,6 +3,7 @@ export interface Issue {
   title: string;
   description: string;
   number: number;
+  created: string;
 }
 
 export enum IssueState {

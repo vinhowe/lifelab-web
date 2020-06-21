@@ -14,19 +14,23 @@ const listItemContainerStyle = css`
   margin-bottom: 4px;
   border: 1px solid #888888;
   border-radius: 4px;
+  cursor: pointer;
 `;
 
 export default function IssueListItem({
   issue: { title, state, number },
+  labId,
 }: {
   issue: Issue;
+  labId: number;
 }): JSX.Element {
   const history = useHistory();
   const { url } = useRouteMatch();
   return (
     <div
       css={listItemContainerStyle}
-      onClick={() => history.push(`${url}/issues/${number}`)}
+      role="button"
+      onClick={() => history.push(`/labs/${labId}/issues/${number}`)}
     >
       <span>{title}</span>
       <IssueStateIndicator state={state} />{" "}
