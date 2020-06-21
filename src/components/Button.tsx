@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import React, { MouseEventHandler } from "react";
+import { colors } from "../theme/theme";
 
 const buttonStyle = (color: ButtonColor) => css`
   background: ${color.default};
@@ -21,7 +22,6 @@ const buttonStyle = (color: ButtonColor) => css`
   }
 
   &:active:enabled {
-    //cursor: pointer;
     box-shadow: none;
     background: ${color.active};
     border-color: ${color.activeBorder};
@@ -31,7 +31,7 @@ const buttonStyle = (color: ButtonColor) => css`
   &:focus:enabled:not(:active) {
     outline: none;
     box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.5),
-      0 0 0 4px rgba(43, 222, 255, 0.4);
+      0 0 0 4px ${colors.highlightBorderColor};
   }
 
   &:disabled {

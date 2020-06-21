@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Editable, ReactEditor, Slate, withReact } from "slate-react";
 import { createEditor, Node } from "slate";
 import { withHistory } from "slate-history";
+import { colors } from "../theme/theme";
 
 const editorStyle = css`
   border: 1px solid #ccc;
@@ -12,6 +13,16 @@ const editorStyle = css`
   font-size: 80%;
   font-family: "Jetbrains Mono", monospace;
   box-shadow: rgba(80, 80, 80, 0.1) 0 2px;
+  transition: all 60ms ease-out;
+
+  &:active {
+    outline: none;
+  }
+
+  &:focus:not(:active) {
+    outline: none;
+    box-shadow: 0 0 0 4px ${colors.highlightBorderColor};
+  }
 `;
 
 const deserialize = (value: string): Node[] => {
