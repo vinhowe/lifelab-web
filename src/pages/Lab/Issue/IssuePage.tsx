@@ -87,24 +87,14 @@ export default function IssuePage(): JSX.Element {
               />
             ) : (
               <h1>
-                <span css={issueNumberStyle}>#{issue.number}</span>
-                {" "}{issue.title}
+                <span css={issueNumberStyle}>#{issue.number}</span>{" "}
+                {issue.title}
               </h1>
             )}
             {editing ? (
               <div css={editButtonsContainerStyle}>
-                <Button
-                  color={ButtonColors.red}
-                  onClick={() => setIssueEdits(undefined)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={() => toggleEditing()}
-                  color={ButtonColors.green}
-                >
-                  Save
-                </Button>
+                <Button onClick={() => toggleEditing()}>Save</Button>
+                <Button onClick={() => setIssueEdits(undefined)}>Cancel</Button>
               </div>
             ) : (
               <div css={editButtonsContainerStyle}>
