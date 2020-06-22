@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import React, { CSSProperties } from "react";
-import { colors } from "../theme/theme";
+import { colors, shadows } from "../theme/theme";
 
 const inputStyle = css`
   background: none;
@@ -9,7 +9,7 @@ const inputStyle = css`
   border-radius: 4px;
   margin: 15px 0;
   font-family: "Lato", sans-serif;
-  box-shadow: rgba(80, 80, 80, 0.1) 0 2px;
+  box-shadow: ${shadows.buttonDrop};
   padding: 8px 10px;
   width: 100%;
   transition: all 60ms ease-out;

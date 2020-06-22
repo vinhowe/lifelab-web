@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import React, { MouseEventHandler } from "react";
-import { colors } from "../theme/theme";
+import { colors, shadows } from "../theme/theme";
 
 const buttonStyle = (color: ButtonColor) => css`
   background: ${color.default};
@@ -11,7 +11,7 @@ const buttonStyle = (color: ButtonColor) => css`
   font-size: 80%;
   color: ${color.isDark ? "#fafafa" : "#212121"};
   box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.3),
-    rgba(80, 80, 80, 0.1) 0 2px;
+    ${shadows.buttonDrop};
   transition: all 60ms ease-out;
   outline: none;
   font-weight: bold;
