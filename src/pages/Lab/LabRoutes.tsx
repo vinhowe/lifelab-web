@@ -10,16 +10,16 @@ export default function LabRoutes(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={`${path}/:labId`}>
+        <Route exact path={`${path}/`}>
           <LabPage />
         </Route>
-        <Route exact path={`${path}/:labId/issues`}>
+        <Route exact path={`${path}/issues`}>
           <IssueListPage />
         </Route>
-        <Route path={`${path}/:labId/issues/new`}>
+        <Route path={`${path}/issues/new`}>
           <NewIssuePage />
         </Route>
-        <Route path={`${path}/:labId/issues/:issueNumber`}>
+        <Route path={`${path}/issues/:issueNumber`}>
           <IssueDetailPage />
         </Route>
       </Switch>

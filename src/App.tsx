@@ -6,7 +6,7 @@ export default function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/labs">
+        <Route path="/labs/:labId">
           <LabRoutes />
         </Route>
       </Switch>
