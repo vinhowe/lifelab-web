@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import React, { MouseEventHandler } from "react";
-import { colors, shadows } from "../theme/theme";
+import { buttonColors, colors, shadows } from "../theme/theme";
 
 const buttonStyle = (color: ButtonColor) => css`
   background: ${color.default};
@@ -52,38 +52,6 @@ interface ButtonColor {
   disabled: string;
   isDark?: boolean;
 }
-
-export const buttonColors = {
-  white: {
-    default: "#fdfdfd",
-    defaultBorder: "#d0d0d0",
-    hover: "#f0f0f0",
-    hoverBorder: "#c8c8c8",
-    active: "#e2e2e2",
-    activeBorder: "#b8b8b8",
-    disabled: "#f2f2f2",
-  },
-  green: {
-    default: "#21d04c",
-    defaultBorder: "#21ba47",
-    hover: "#22c44a",
-    hoverBorder: "#20a140",
-    active: "#21aa43",
-    activeBorder: "#1f933c",
-    disabled: "#82c79b",
-    isDark: true,
-  },
-  red: {
-    default: "#d02121",
-    defaultBorder: "#ba2121",
-    hover: "#c42222",
-    hoverBorder: "#a12020",
-    active: "#aa2121",
-    activeBorder: "#931f1f",
-    disabled: "#c78282",
-    isDark: true,
-  },
-};
 
 interface ButtonProps {
   color?: ButtonColor;

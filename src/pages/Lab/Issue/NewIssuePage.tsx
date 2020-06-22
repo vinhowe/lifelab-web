@@ -4,10 +4,11 @@ import { useHistory, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { initialNewIssue, NewIssue } from "../../../types/issue";
 import Page from "../../../components/Page";
-import Button, { buttonColors } from "../../../components/Button";
+import Button from "../../../components/Button";
 import { createIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
 import EditPreview from "../../../components/EditPreview/EditPreview";
+import { buttonColors } from "../../../theme/theme";
 
 const issueHeadingContainerStyle = css`
   display: flex;

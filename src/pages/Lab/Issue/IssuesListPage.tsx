@@ -6,7 +6,8 @@ import IssueList from "../../../components/IssueList";
 import { useEffect, useState } from "react";
 import { getIssues } from "../../../services/issueApi";
 import { Issue } from "../../../types/issue";
-import Button, { buttonColors } from "../../../components/Button";
+import Button from "../../../components/Button";
+import { buttonColors } from "../../../theme/theme";
 
 const headerBarStyle = css`
   display: flex;
