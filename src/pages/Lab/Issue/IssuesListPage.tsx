@@ -6,7 +6,7 @@ import IssueList from "../../../components/IssueList";
 import { useEffect, useState } from "react";
 import { getIssues } from "../../../services/issueApi";
 import { Issue } from "../../../types/issue";
-import Button, { ButtonColors } from "../../../components/Button";
+import Button, { buttonColors } from "../../../components/Button";
 
 const headerBarStyle = css`
   display: flex;
@@ -28,7 +28,7 @@ export default function IssuesListPage(): JSX.Element {
       <div css={headerBarStyle}>
         <h1>Issues in lab #{labId}</h1>
         <Button
-          color={ButtonColors.green}
+          color={buttonColors.green}
           onClick={() => history.push(`/labs/${labId}/issues/new`)}
         >
           New issue

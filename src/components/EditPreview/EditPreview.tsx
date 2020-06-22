@@ -4,6 +4,7 @@ import PlaintextEditor, { PlaintextEditorProps } from "../PlaintextEditor";
 import { useState } from "react";
 import EditPreviewTab from "./EditPreviewTab";
 import ReactMarkdown from "react-markdown";
+import { shadows } from "../../theme/theme";
 
 export type EditPreviewProps = PlaintextEditorProps;
 
@@ -16,7 +17,7 @@ const containerStyle = css`
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 8px;
-  box-shadow: rgba(80, 80, 80, 0.1) 0 2px;
+  box-shadow: ${shadows.buttonDrop};
 `;
 
 const tabsContainerStyle = css`

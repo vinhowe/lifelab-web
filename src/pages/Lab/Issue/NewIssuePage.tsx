@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { initialNewIssue, NewIssue } from "../../../types/issue";
 import Page from "../../../components/Page";
-import Button, { ButtonColors } from "../../../components/Button";
+import Button, { buttonColors } from "../../../components/Button";
 import { createIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
 import EditPreview from "../../../components/EditPreview/EditPreview";
@@ -53,7 +53,7 @@ export default function NewIssuePage(): JSX.Element {
               <Button
                 onClick={() => postIssue()}
                 disabled={!validate()}
-                color={ButtonColors.green}
+                color={buttonColors.green}
               >
                 Submit
               </Button>

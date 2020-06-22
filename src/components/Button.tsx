@@ -10,8 +10,7 @@ const buttonStyle = (color: ButtonColor) => css`
   border: solid ${color.defaultBorder} 1px;
   font-size: 80%;
   color: ${color.isDark ? "#fafafa" : "#212121"};
-  box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.3),
-    ${shadows.buttonDrop};
+  box-shadow: inset 0 1px 0 0 rgba(250, 250, 250, 0.3), ${shadows.buttonDrop};
   transition: all 60ms ease-out;
   outline: none;
   font-weight: bold;
@@ -54,7 +53,7 @@ interface ButtonColor {
   isDark?: boolean;
 }
 
-export const ButtonColors: Record<string, ButtonColor> = {
+export const buttonColors = {
   white: {
     default: "#fdfdfd",
     defaultBorder: "#d0d0d0",
@@ -96,7 +95,7 @@ interface ButtonProps {
 export default function Button({
   children,
   onClick,
-  color = ButtonColors.white,
+  color = buttonColors.white,
   disabled = false,
 }: ButtonProps): JSX.Element {
   return (
