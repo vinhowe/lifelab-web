@@ -29,9 +29,7 @@ const issueSubheadingContainerStyle = css`
 `;
 
 const editButtonsContainerStyle = css`
-  flex: max-content;
   display: flex;
-  flex-wrap: nowrap;
   button {
     margin-left: 8px;
   }
