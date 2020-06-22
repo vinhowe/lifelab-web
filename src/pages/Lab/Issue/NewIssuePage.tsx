@@ -3,7 +3,7 @@ import { css, jsx } from "@emotion/core";
 import { useHistory, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { initialNewIssue, NewIssue } from "../../../types/issue";
-import Page from "../../../components/Page";
+import PageWidth from "../../../components/PageWidth";
 import Button from "../../../components/Button";
 import { createIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
@@ -39,7 +39,7 @@ export default function NewIssuePage(): JSX.Element {
   };
 
   return (
-    <Page>
+    <PageWidth>
       {issue && (
         <div>
           <div css={issueHeadingContainerStyle}>
@@ -67,6 +67,6 @@ export default function NewIssuePage(): JSX.Element {
           />
         </div>
       )}
-    </Page>
+    </PageWidth>
   );
 }

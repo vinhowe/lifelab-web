@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Issue, IssueEdits } from "../../../types/issue";
 import IssueStateIndicator from "../../../components/IssueStateIndicator";
-import Page from "../../../components/Page";
+import PageWidth from "../../../components/PageWidth";
 import Button from "../../../components/Button";
 import { getIssue, updateIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
@@ -66,7 +66,7 @@ export default function IssueDetailPage(): JSX.Element {
   }, []);
 
   return (
-    <Page>
+    <PageWidth>
       {issue && (
         <div>
           <div css={issueHeadingContainerStyle}>
@@ -115,6 +115,6 @@ export default function IssueDetailPage(): JSX.Element {
           )}
         </div>
       )}
-    </Page>
+    </PageWidth>
   );
 }

@@ -11,7 +11,7 @@ const pageStyle = css`
   width: 600px;
 `;
 
-export default function Page({ children }: { children: any }): JSX.Element {
+export default function PageWidth({ children }: { children: any }): JSX.Element {
   return (
     <main css={pageWrapperStyle}>
       <div css={pageStyle}>{children}</div>

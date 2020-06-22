@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { useHistory, useParams } from "react-router-dom";
-import Page from "../../../components/Page";
+import PageWidth from "../../../components/PageWidth";
 import IssueList from "../../../components/IssueList";
 import { useEffect, useState } from "react";
 import { getIssues } from "../../../services/issueApi";
@@ -25,7 +25,7 @@ export default function IssuesListPage(): JSX.Element {
   }, []);
 
   return (
-    <Page>
+    <PageWidth>
       <div css={headerBarStyle}>
         <h1>Issues in lab #{labId}</h1>
         <Button
@@ -36,6 +36,6 @@ export default function IssuesListPage(): JSX.Element {
         </Button>
       </div>
       {issues !== undefined && <IssueList labId={labId} issues={issues} />}
-    </Page>
+    </PageWidth>
   );
 }
