@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { Issue, IssueEdits } from "../../../types/issue";
+import { Issue, IssueEdits, IssueState } from "../../../types/issue";
 import IssueStateIndicator from "../../../components/IssueStateIndicator";
 import PageWidth from "../../../components/PageWidth";
 import Button from "../../../components/Button";
@@ -97,7 +97,27 @@ export default function IssueDetailPage(): JSX.Element {
             )}
           </div>
           <div css={issueSubheadingContainerStyle}>
-            <IssueStateIndicator state={issue.state} />
+            <IssueStateIndicator state={issueEdits?.state || issue.state} />
+            {editing && (
+              <span style={{ marginLeft: "10px" }}>
+                <Button
+                  onClick={() =>
+                    setIssueEdits({
+                      ...issueEdits,
+                      state:
+                        (issueEdits || issue).state === IssueState.OPEN
+                          ? IssueState.CLOSED
+                          : IssueState.OPEN,
+                    })
+                  }
+                >
+                  {(issueEdits || issue).state === IssueState.OPEN
+                    ? "Close"
+                    : "Open"}{" "}
+                  this issue
+                </Button>
+              </span>
+            )}
             <span css={issueSubheadingExtraInfoStyle}>
               Created {new Date(issue.created).toDateString()}
             </span>
