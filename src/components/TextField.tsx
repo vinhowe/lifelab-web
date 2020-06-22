@@ -17,7 +17,7 @@ const inputStyle = css`
   &:active:enabled {
     outline: none;
   }
-  
+
   &:focus:enabled:not(:active) {
     outline: none;
     box-shadow: 0 0 0 4px ${colors.highlightBorderColor};
@@ -41,6 +41,7 @@ export default function TextField({
       css={inputStyle}
       value={value}
       style={style}
+      placeholder={"Start writing..."}
       onChange={(e) => onChange(e.target.value)}
     />
   );

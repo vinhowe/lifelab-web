@@ -59,7 +59,9 @@ export default function EditPreview(props: EditPreviewProps): JSX.Element {
           <PlaintextEditor {...props} />
         )}
         {editPreviewState === EditPreviewState.Preview && (
-          <ReactMarkdown css={previewStyle}>{props.value}</ReactMarkdown>
+          <ReactMarkdown css={previewStyle}>
+            {props.value || "_Nothing here_"}
+          </ReactMarkdown>
         )}
       </div>
     </div>

@@ -89,6 +89,7 @@ export const ButtonColors: Record<string, ButtonColor> = {
 interface ButtonProps {
   color?: ButtonColor;
   onClick?: MouseEventHandler;
+  disabled?: boolean;
   children: React.ReactNode;
 }
 
@@ -96,9 +97,14 @@ export default function Button({
   children,
   onClick,
   color = ButtonColors.white,
+  disabled = false,
 }: ButtonProps): JSX.Element {
   return (
-    <button css={buttonStyle(color)} onClick={onClick} disabled={!onClick}>
+    <button
+      css={buttonStyle(color)}
+      onClick={onClick}
+      disabled={!onClick || disabled}
+    >
       {children}
     </button>
   );

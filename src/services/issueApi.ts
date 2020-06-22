@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Issue, IssueEdits } from "../types/issue";
+import { Issue, IssueEdits, NewIssue } from "../types/issue";
 
 const API_ROOT = "http://localhost:8000";
 
@@ -30,4 +30,12 @@ export async function updateIssue(
       edits
     )
   ).data;
+}
+
+export async function createIssue(
+  labId: number,
+  issue: NewIssue
+): Promise<Issue> {
+  return (await axios.post(`${API_ROOT}/api/dev/labs/${labId}/issues/`, issue))
+    .data;
 }
