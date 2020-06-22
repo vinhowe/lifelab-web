@@ -1,5 +1,5 @@
 export const shadows = {
-  buttonDrop: "rgba(60, 60, 60, 0.1) 0 1.5px 1px",
+  buttonDrop: "rgba(80, 80, 80, 0.1) 0 1.5px 1px",
 };
 
 export const colors = {
