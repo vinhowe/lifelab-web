@@ -6,6 +6,7 @@ import { IssueState } from "../types/issue";
 
 export default function IssueStateIndicator({
   state,
+  small,
 }: IssueStateIndicatorProps): JSX.Element {
   let color;
   switch (state) {
@@ -17,9 +18,10 @@ export default function IssueStateIndicator({
       break;
   }
 
-  return <IssueLikeStateIndicator color={color} state={state} />;
+  return <IssueLikeStateIndicator color={color} state={state} small={small} />;
 }
 
 interface IssueStateIndicatorProps {
   state: IssueState;
+  small?: boolean;
 }

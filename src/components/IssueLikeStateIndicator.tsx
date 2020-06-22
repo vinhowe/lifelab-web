@@ -3,9 +3,10 @@ import { css, jsx } from "@emotion/core";
 import { uppercaseFirst } from "../utilities/strings";
 import React from "react";
 
-const indicatorStyle = css`
-  padding: 6px;
-  border-radius: 4px;
+const indicatorStyle = (small: boolean) => css`
+  padding: ${small ? 6 : 8}px 12px;
+  border-radius: 100px;
+  ${small && "font-size: 80%"};
   font-weight: bold;
   color: #fafafa;
 `;
@@ -13,10 +14,11 @@ const indicatorStyle = css`
 export default function IssueLikeStateIndicator({
   state,
   color,
+  small = false,
 }: IssueLikeStateIndicatorProps): JSX.Element {
   const formattedState = uppercaseFirst(state);
   return (
-    <span css={indicatorStyle} style={{ backgroundColor: color }}>
+    <span css={indicatorStyle(small)} style={{ backgroundColor: color }}>
       {formattedState}
     </span>
   );
@@ -25,6 +27,7 @@ export default function IssueLikeStateIndicator({
 interface IssueLikeStateIndicatorProps {
   state: string;
   color: IssueLikeStateColor;
+  small?: boolean;
 }
 
 export enum IssueLikeStateColor {

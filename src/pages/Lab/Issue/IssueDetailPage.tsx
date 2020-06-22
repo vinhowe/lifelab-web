@@ -5,8 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Issue, IssueEdits } from "../../../types/issue";
 import IssueStateIndicator from "../../../components/IssueStateIndicator";
 import Page from "../../../components/Page";
-import PlaintextEditor from "../../../components/PlaintextEditor";
-import Button, { ButtonColors } from "../../../components/Button";
+import Button from "../../../components/Button";
 import { getIssue, updateIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
 import ReactMarkdown from "react-markdown";
@@ -31,6 +30,8 @@ const issueSubheadingContainerStyle = css`
 
 const editButtonsContainerStyle = css`
   flex: max-content;
+  display: flex;
+  flex-wrap: nowrap;
   button {
     margin-left: 8px;
   }
@@ -41,7 +42,7 @@ const issueSubheadingExtraInfoStyle = css`
   color: rgba(0, 0, 0, 0.6);
 `;
 
-export default function IssuePage(): JSX.Element {
+export default function IssueDetailPage(): JSX.Element {
   const { labId, issueNumber } = useParams();
   const [issue, setIssue] = useState<Issue>();
   const [issueEdits, setIssueEdits] = useState<IssueEdits>();
@@ -62,13 +63,8 @@ export default function IssuePage(): JSX.Element {
     setIssueEdits(undefined);
   };
 
-  const loadIssue = async (): Promise<void> => {
-    setIssue(await getIssue(labId, issueNumber));
-  };
-
   useEffect(() => {
-    // noinspection JSIgnoredPromiseFromCall
-    loadIssue();
+    getIssue(labId, issueNumber).then(setIssue);
   }, []);
 
   return (
@@ -79,7 +75,7 @@ export default function IssuePage(): JSX.Element {
             {editing ? (
               <TextField
                 value={issueEdits?.title || issue.title}
-                style={{ width: "70%" }}
+                style={{ width: "100%" }}
                 onChange={(title) =>
                   title !== issue.title &&
                   setIssueEdits({ ...issueEdits, title })

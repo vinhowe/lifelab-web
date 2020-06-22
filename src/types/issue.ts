@@ -1,6 +1,6 @@
 export interface NewIssue {
   title: string;
-  description: string;
+  description?: string;
 }
 
 export interface Issue {
@@ -25,5 +25,4 @@ export enum IssueState {
 
 export const initialNewIssue: NewIssue = {
   title: "",
-  description: "",
 };

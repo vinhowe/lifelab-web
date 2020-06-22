@@ -2,19 +2,27 @@
 import { css, jsx } from "@emotion/core";
 import React from "react";
 import IssueStateIndicator from "./IssueStateIndicator";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Issue } from "../types/issue";
 
 const listItemContainerStyle = css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  border: 1px solid #888888;
-  border-radius: 4px;
+  padding: 10px 16px;
   cursor: pointer;
+
+  > :last-child {
+    margin-left: 16px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: initial;
+  }
 `;
 
 export default function IssueListItem({
@@ -25,15 +33,14 @@ export default function IssueListItem({
   labId: number;
 }): JSX.Element {
   const history = useHistory();
-  const { url } = useRouteMatch();
   return (
     <div
       css={listItemContainerStyle}
       role="button"
       onClick={() => history.push(`/labs/${labId}/issues/${number}`)}
     >
-      <span>{title}</span>
-      <IssueStateIndicator state={state} />{" "}
+      <a href="">{title}</a>
+      <IssueStateIndicator state={state} small />
     </div>
   );
 }
