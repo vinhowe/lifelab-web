@@ -33,7 +33,7 @@ export default function IssuesListPage(): JSX.Element {
   return (
     <PageWidth>
       <div css={headerBarStyle}>
-        <TextField value={searchQuery} onChange={setSearchQuery} />
+        <TextField placeholder="Search" />
         <div css={buttonWrapperStyle}>
           <Button
             color={buttonColors.green}
