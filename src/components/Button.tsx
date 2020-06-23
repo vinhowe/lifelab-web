@@ -1,9 +1,11 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import React, { MouseEventHandler } from "react";
-import { buttonColors, colors, shadows } from "../theme/theme";
+import { buttonColors, colors } from "../theme/colors";
+import { sansFontFamily, shadows } from "../theme/styles";
 
 const buttonStyle = (color: ButtonColor) => css`
+  white-space: nowrap;
   background: ${color.default};
   padding: 6px 10px;
   border-radius: 4px;
@@ -14,6 +16,7 @@ const buttonStyle = (color: ButtonColor) => css`
   transition: all 60ms ease-out;
   outline: none;
   font-weight: bold;
+  ${sansFontFamily}
 
   &:hover:enabled {
     cursor: pointer;

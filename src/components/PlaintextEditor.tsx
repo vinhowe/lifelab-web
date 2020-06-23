@@ -4,7 +4,7 @@ import { CSSProperties, useEffect, useMemo, useState } from "react";
 import { Editable, ReactEditor, Slate, withReact } from "slate-react";
 import { createEditor, Node, Editor, Transforms } from "slate";
 import { withHistory } from "slate-history";
-import { colors } from "../theme/theme";
+import { colors } from "../theme/colors";
 
 const editorStyle = css`
   border: 1px solid #ccc;

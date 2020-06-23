@@ -8,7 +8,7 @@ import Button from "../../../components/Button";
 import { createIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
 import EditPreview from "../../../components/EditPreview/EditPreview";
-import { buttonColors } from "../../../theme/theme";
+import { buttonColors } from "../../../theme/colors";
 
 const issueHeadingContainerStyle = css`
   display: flex;

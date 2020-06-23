@@ -4,7 +4,7 @@ import PlaintextEditor, { PlaintextEditorProps } from "../PlaintextEditor";
 import { useState } from "react";
 import EditPreviewTab from "./EditPreviewTab";
 import ReactMarkdown from "react-markdown";
-import { shadows } from "../../theme/theme";
+import { shadows } from "../../theme/styles";
 
 export type EditPreviewProps = PlaintextEditorProps;
 

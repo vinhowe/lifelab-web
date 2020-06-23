@@ -1,21 +1,28 @@
 import React from "react";
-import { Route, BrowserRouter, Switch, useRouteMatch, useParams } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter,
+  Switch,
+  useRouteMatch,
+  useParams,
+} from "react-router-dom";
 import LabPage from "./LabPage";
 import IssueDetailPage from "./Issue/IssueDetailPage";
 import NewIssuePage from "./Issue/NewIssuePage";
 import IssueListPage from "./Issue/IssuesListPage";
+import LabNav from "../../components/LabNav/LabNav";
 import PageWidth from "../../components/PageWidth";
-import { jsx } from "@emotion/core";
 
 export default function LabRoutes(): JSX.Element {
   const { path } = useRouteMatch();
   const { labId } = useParams();
   return (
     <>
-      <PageWidth>
-        <h1>Lab #{labId}</h1>
-      </PageWidth>
       <BrowserRouter>
+        <PageWidth>
+          <h2>Lab #{labId}</h2>
+          <LabNav labId={labId} />
+        </PageWidth>
         <Switch>
           <Route exact path={`${path}/`}>
             <LabPage />

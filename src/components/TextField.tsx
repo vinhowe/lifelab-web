@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import React, { CSSProperties } from "react";
-import { colors, shadows } from "../theme/theme";
+import { colors} from "../theme/colors";
+import { shadows } from "../theme/styles";
 
 const inputStyle = css`
   background: none;

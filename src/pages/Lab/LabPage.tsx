@@ -16,6 +16,9 @@ export default function LabPage(): JSX.Element {
   const history = useHistory();
   return (
     <PageWidth>
+      <PageWidth>
+        <h1>Lab #{labId}</h1>
+      </PageWidth>
       <div css={navButtonsContainerStyle}>
         <Button onClick={() => history.push(`/labs/${labId}/issues/`)}>
           Issues
