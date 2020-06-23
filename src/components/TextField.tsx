@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import React, { CSSProperties } from "react";
-import { colors} from "../theme/colors";
+import { colors } from "../theme/colors";
 import { shadows } from "../theme/styles";
+import { buttonColors } from "../theme/colors";
 
 const inputStyle = css`
   background: none;
@@ -19,6 +20,11 @@ const inputStyle = css`
     outline: none;
   }
 
+  &:disabled {
+    background: ${buttonColors.white.disabled};
+    border-color: ${buttonColors.white.disabled};
+  }
+
   &:focus:enabled:not(:active) {
     outline: none;
     box-shadow: 0 0 0 4px ${colors.highlightBorderColor};
@@ -26,13 +32,17 @@ const inputStyle = css`
 `;
 
 export interface TextFieldProps {
-  value: string;
-  onChange: (value: string) => void;
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange?: (value: string) => void;
   style?: CSSProperties;
 }
 
 export default function TextField({
   value,
+  placeholder,
+  disabled,
   onChange,
   style,
 }: TextFieldProps): JSX.Element {
@@ -42,8 +52,9 @@ export default function TextField({
       css={inputStyle}
       value={value}
       style={style}
-      placeholder={"Start writing..."}
-      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder || "Start writing..."}
+      disabled={disabled || !onChange || !value}
+      onChange={(e) => !!onChange && onChange(e.target.value)}
     />
   );
 }
