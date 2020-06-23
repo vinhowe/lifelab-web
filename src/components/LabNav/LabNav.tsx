@@ -11,6 +11,13 @@ const navStyle = css`
   margin-bottom: 24px;
 `;
 
+const labTitleStyle = css`
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  font-weight: bold;
+`;
+
 export interface LabNavProps {
   labId: string;
 }
@@ -18,6 +25,7 @@ export interface LabNavProps {
 export default function LabNav({ labId }: LabNavProps): JSX.Element {
   return (
     <nav css={navStyle}>
+      <span css={labTitleStyle}>Lab {labId}</span>
       <LabNavTab route={"/labs/:labId/issues"} labId={labId}>
         Issues
       </LabNavTab>

@@ -20,7 +20,6 @@ export default function LabRoutes(): JSX.Element {
     <>
       <BrowserRouter>
         <PageWidth>
-          <h2>Lab #{labId}</h2>
           <LabNav labId={labId} />
         </PageWidth>
         <Switch>

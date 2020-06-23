@@ -21,7 +21,7 @@ export const tabStyle = (
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom: none;
-  padding: ${small ? "6px 10px" : "12px 16px"};
+  padding: ${small ? "6px 10px" : "8px 12px"};
   ${!small && "font-size: 90%"};
   cursor: pointer;
   transition: all 60ms ease-out;

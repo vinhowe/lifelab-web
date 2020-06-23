@@ -15,7 +15,7 @@ export default function EditPreviewTab({
   onClick,
 }: PropsWithChildren<EditPreviewTabProps>): JSX.Element {
   return (
-    <button onClick={onClick} css={tabStyle(active)}>
+    <button onClick={onClick} css={tabStyle(active, true)}>
       {children}
     </button>
   );
