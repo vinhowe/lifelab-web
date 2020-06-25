@@ -141,8 +141,8 @@ export default function ExperimentDetailPage(): JSX.Element {
               onChange={(endDate) => setExperiment({ ...experiment, endDate })}
             />
           )}
-          <h3>Description</h3>
-          {editing ? (
+          {(editing || experiment.description) && <h3>Description</h3>}
+          {editing && (
             <EditPreview
               value={experimentEdits?.description || experiment.description}
               onChange={(description) =>
@@ -150,7 +150,8 @@ export default function ExperimentDetailPage(): JSX.Element {
               }
               autoFocus
             />
-          ) : (
+          )}
+          {!editing && experiment.description && (
             <ReactMarkdown>{experiment.description}</ReactMarkdown>
           )}
           <h3>Terms</h3>
