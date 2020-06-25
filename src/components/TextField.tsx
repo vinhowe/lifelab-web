@@ -13,6 +13,7 @@ const inputStyle = css`
   font-family: "Lato", sans-serif;
   box-shadow: ${shadows.buttonDrop};
   padding: 8px 10px;
+  width: calc(100% - 20px);
   transition: all 60ms ease-out;
 
   &:active:enabled {
