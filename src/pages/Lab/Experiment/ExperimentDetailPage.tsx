@@ -121,7 +121,9 @@ export default function ExperimentDetailPage(): JSX.Element {
             ) : (
               <ExperimentStateSelector
                 state={experimentEdits?.state || experiment.state}
-                onChange={(state) => setExperiment({ ...experiment, state })}
+                onChange={(state) =>
+                  setExperimentEdits({ ...experiment, state })
+                }
               />
             )}
             {!editing && (
