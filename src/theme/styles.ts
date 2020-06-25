@@ -39,6 +39,49 @@ export const tabStyle = (
   }
 `;
 
+export const listStyle = css`
+  > * {
+    border: solid #ccc 1px;
+    border-top: none;
+    transition: background-color 60ms ease-out;
+  }
+
+  > *:hover {
+    background-color: #f0f0f0;
+  }
+
+  > *:first-child {
+    border-top: solid #ccc 1px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  > *:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+`;
+
+export const listItemContainerStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  cursor: pointer;
+
+  > :last-child {
+    margin-left: 16px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: initial;
+  }
+`;
+
 export const shadows = {
   buttonDrop: "rgba(80, 80, 80, 0.1) 0 1.5px 1px",
 };

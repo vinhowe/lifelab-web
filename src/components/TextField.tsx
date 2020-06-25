@@ -13,7 +13,6 @@ const inputStyle = css`
   font-family: "Lato", sans-serif;
   box-shadow: ${shadows.buttonDrop};
   padding: 8px 10px;
-  width: 100%;
   transition: all 60ms ease-out;
 
   &:active:enabled {
@@ -37,6 +36,7 @@ export interface TextFieldProps {
   disabled?: boolean;
   onChange?: (value: string) => void;
   style?: CSSProperties;
+  type?: string;
 }
 
 export default function TextField({
@@ -45,15 +45,16 @@ export default function TextField({
   disabled,
   onChange,
   style,
+  type = "text",
 }: TextFieldProps): JSX.Element {
   return (
     <input
-      type="text"
+      type={type}
       css={inputStyle}
       value={value}
       style={style}
       placeholder={placeholder || "Start writing..."}
-      disabled={disabled || !onChange || !value}
+      disabled={disabled || !onChange}
       onChange={(e) => !!onChange && onChange(e.target.value)}
     />
   );

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Issue, IssueEdits, NewIssue } from "../types/issue";
-
-const API_ROOT = "http://localhost:8000";
+import { API_ROOT } from "./commonApi";
 
 export async function getIssues(labId: number): Promise<Issue[]> {
   // TODO: Abstract error handling here
