@@ -41,7 +41,7 @@ export default function LabNav({ labId }: LabNavProps): JSX.Element {
           <Link to={`/labs/${labId}`}>Lab {labId}</Link>
         </h3>
         <div css={labActionButtonsContainerStyle}>
-          <Button color={buttonColors.green}>Start review</Button>
+          <Button color={buttonColors.green}>Check-in</Button>
         </div>
       </div>
       <nav css={navStyle}>
