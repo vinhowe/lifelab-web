@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import React from "react";
 import LabNavTab from "./LabNavTab";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "../Button";
 import { buttonColors } from "../../theme/colors";
 
@@ -34,6 +34,7 @@ export interface LabNavProps {
 }
 
 export default function LabNav({ labId }: LabNavProps): JSX.Element {
+  const history = useHistory();
   return (
     <header>
       <div css={labInfoStyle}>
@@ -41,7 +42,12 @@ export default function LabNav({ labId }: LabNavProps): JSX.Element {
           <Link to={`/labs/${labId}`}>Lab {labId}</Link>
         </h3>
         <div css={labActionButtonsContainerStyle}>
-          <Button color={buttonColors.green}>Check-in</Button>
+          <Button
+            color={buttonColors.green}
+            onClick={() => history.push(`/labs/${labId}/checkin`)}
+          >
+            Check-in
+          </Button>
         </div>
       </div>
       <nav css={navStyle}>

@@ -26,3 +26,17 @@ export enum IssueState {
 export const initialNewIssue: NewIssue = {
   title: "",
 };
+
+export interface CheckIn {
+  complete: boolean;
+  experiments: string[];
+  number: number;
+  retrospective: string;
+  created: string;
+  url: string;
+}
+
+export interface CheckInEdits {
+  complete?: boolean;
+  retrospective?: string;
+}

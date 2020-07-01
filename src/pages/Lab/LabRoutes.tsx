@@ -15,6 +15,7 @@ import PageWidth from "../../components/PageWidth";
 import ExperimentsListPage from "./Experiment/ExperimentsListPage";
 import ExperimentDetailPage from "./Experiment/ExperimentDetailPage";
 import NewExperimentPage from "./Experiment/NewExperimentPage";
+import CheckInTodayPage from "./CheckIn/CheckInTodayPage";
 
 export default function LabRoutes(): JSX.Element {
   const { path } = useRouteMatch();
@@ -34,6 +35,9 @@ export default function LabRoutes(): JSX.Element {
           </Route>
           <Route path={`${path}/issues/new`}>
             <NewIssuePage />
+          </Route>
+          <Route path={`${path}/checkin`}>
+            <CheckInTodayPage />
           </Route>
           <Route path={`${path}/issues/:issueNumber`}>
             <IssueDetailPage />
