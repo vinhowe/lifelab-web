@@ -134,8 +134,10 @@ export default function ExperimentDetailPage(): JSX.Element {
           {editing && (
             <TextField
               type="date"
-              value={experiment?.endDate || ""}
-              onChange={(endDate) => setExperiment({ ...experiment, endDate })}
+              value={experimentEdits?.endDate || experiment?.endDate}
+              onChange={(endDate) =>
+                setExperimentEdits({ ...experiment, endDate })
+              }
             />
           )}
           {(editing || experiment.description) && <h3>Description</h3>}

@@ -19,6 +19,7 @@ export interface Experiment {
 export interface ExperimentEdits {
   state?: ExperimentState;
   title?: string;
+  endDate?: string;
   description?: string;
   terms?: string;
 }
