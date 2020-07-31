@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { Prompt, useParams } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
 import PageWidth from "../../../components/PageWidth";
 import Button from "../../../components/Button";
 import TextField from "../../../components/TextField";
@@ -18,6 +18,7 @@ import {
 } from "../../../services/experimentApi";
 import ExperimentStateIndicator from "../../../components/ExperimentStateIndicator";
 import ExperimentStateSelector from "../../../components/ExperimentStateSelector";
+import preventUnloadEventHandler from "../../../utilities/preventUnloadEventHandler";
 
 const experimentHeadingContainerStyle = css`
   display: flex;
@@ -57,8 +58,11 @@ export default function ExperimentDetailPage(): JSX.Element {
   const toggleEditing = async () => {
     if (!editing) {
       setExperimentEdits({});
+      window.addEventListener("beforeunload", preventUnloadEventHandler);
       return;
     }
+
+    window.removeEventListener("beforeunload", preventUnloadEventHandler);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (Object.keys(experimentEdits as any).length > 0) {
@@ -73,8 +77,17 @@ export default function ExperimentDetailPage(): JSX.Element {
     setExperimentEdits(undefined);
   };
 
+  const cancelEdits = () => {
+    setExperimentEdits(undefined);
+    // noinspection JSIgnoredPromiseFromCall
+    toggleEditing();
+  };
+
   useEffect(() => {
     getExperiment(labId, experimentNumber).then(setExperiment);
+
+    return () =>
+      window.removeEventListener("beforeunload", preventUnloadEventHandler);
   }, []);
 
   return (
@@ -99,14 +112,12 @@ export default function ExperimentDetailPage(): JSX.Element {
             )}
             {editing ? (
               <div css={editButtonsContainerStyle}>
-                <Button onClick={() => toggleEditing()}>Save</Button>
-                <Button onClick={() => setExperimentEdits(undefined)}>
-                  Cancel
-                </Button>
+                <Button onClick={toggleEditing}>Save</Button>
+                <Button onClick={cancelEdits}>Cancel</Button>
               </div>
             ) : (
               <div css={editButtonsContainerStyle}>
-                <Button onClick={() => toggleEditing()}>Edit</Button>
+                <Button onClick={toggleEditing}>Edit</Button>
               </div>
             )}
           </div>
@@ -167,6 +178,10 @@ export default function ExperimentDetailPage(): JSX.Element {
           )}
         </div>
       )}
+      <Prompt
+        message="You have unsaved work. Are you sure you want to leave?"
+        when={editing}
+      />
     </PageWidth>
   );
 }

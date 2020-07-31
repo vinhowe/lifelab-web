@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import PageWidth from "../../../components/PageWidth";
-import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Prompt, useParams } from "react-router-dom";
 import { CheckIn, CheckInEdits } from "../../../types/issue";
 import {
   getCheckInToday,
@@ -14,6 +14,7 @@ import ExperimentList from "../../../components/ExperimentList";
 import EditPreview from "../../../components/EditPreview/EditPreview";
 import TextField from "../../../components/TextField";
 import Button from "../../../components/Button";
+import preventUnloadEventHandler from "../../../utilities/preventUnloadEventHandler";
 
 const checkInHeadingContainerStyle = css`
   display: flex;
@@ -26,6 +27,7 @@ export default function CheckInTodayPage(): JSX.Element {
   const [checkIn, setCheckIn] = useState<CheckIn>();
   const [experiments, setExperiments] = useState<Experiment[]>();
   const [checkInEdits, setCheckInEdits] = useState<CheckInEdits>({});
+  const beforeUnloadListenerRef = useRef<(e: BeforeUnloadEvent) => void>();
 
   useEffect(() => {
     getCheckInToday(labId).then(setCheckIn);
@@ -43,8 +45,25 @@ export default function CheckInTodayPage(): JSX.Element {
     ).then(setExperiments);
   }, [checkIn]);
 
-  const saveCheckInEdits = useCallback(() => {
-    updateCheckInToday(labId, checkInEdits);
+  useEffect(() => {
+    const hasEdits = Object.keys(checkInEdits).length > 0;
+
+    if (hasEdits && beforeUnloadListenerRef.current === undefined) {
+      beforeUnloadListenerRef.current = preventUnloadEventHandler;
+      window.addEventListener("beforeunload", beforeUnloadListenerRef.current);
+    } else if (!hasEdits && beforeUnloadListenerRef.current !== undefined) {
+      window.removeEventListener(
+        "beforeunload",
+        beforeUnloadListenerRef.current
+      );
+    }
+  }, [checkInEdits]);
+
+  const saveCheckInEdits = useCallback(async () => {
+    // noinspection JSIgnoredPromiseFromCall
+    await updateCheckInToday(labId, checkInEdits);
+    setCheckIn({ ...checkIn, ...(checkInEdits as CheckIn) });
+    setCheckInEdits({});
   }, [labId, checkInEdits]);
 
   return (
@@ -68,6 +87,10 @@ export default function CheckInTodayPage(): JSX.Element {
           />
         </div>
       )}
+      <Prompt
+        message="You have unsaved work. Are you sure you want to leave?"
+        when={Object.keys(checkInEdits).length > 0}
+      />
     </PageWidth>
   );
 }

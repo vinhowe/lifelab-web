@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { useParams } from "react-router-dom";
+import { Prompt, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Issue, IssueEdits, IssueState } from "../../../types/issue";
 import IssueStateIndicator from "../../../components/IssueStateIndicator";
@@ -10,6 +10,7 @@ import { getIssue, updateIssue } from "../../../services/issueApi";
 import TextField from "../../../components/TextField";
 import ReactMarkdown from "react-markdown";
 import EditPreview from "../../../components/EditPreview/EditPreview";
+import preventUnloadEventHandler from "../../../utilities/preventUnloadEventHandler";
 
 const issueHeadingContainerStyle = css`
   display: flex;
@@ -49,8 +50,11 @@ export default function IssueDetailPage(): JSX.Element {
   const toggleEditing = async () => {
     if (!editing) {
       setIssueEdits({});
+      window.addEventListener("beforeunload", preventUnloadEventHandler);
       return;
     }
+
+    window.removeEventListener("beforeunload", preventUnloadEventHandler);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (Object.keys(issueEdits as any).length > 0) {
@@ -59,6 +63,12 @@ export default function IssueDetailPage(): JSX.Element {
     }
 
     setIssueEdits(undefined);
+  };
+
+  const cancelEdits = () => {
+    setIssueEdits(undefined);
+    // noinspection JSIgnoredPromiseFromCall
+    toggleEditing();
   };
 
   useEffect(() => {
@@ -87,12 +97,12 @@ export default function IssueDetailPage(): JSX.Element {
             )}
             {editing ? (
               <div css={editButtonsContainerStyle}>
-                <Button onClick={() => toggleEditing()}>Save</Button>
-                <Button onClick={() => setIssueEdits(undefined)}>Cancel</Button>
+                <Button onClick={toggleEditing}>Save</Button>
+                <Button onClick={cancelEdits}>Cancel</Button>
               </div>
             ) : (
               <div css={editButtonsContainerStyle}>
-                <Button onClick={() => toggleEditing()}>Edit</Button>
+                <Button onClick={toggleEditing}>Edit</Button>
               </div>
             )}
           </div>
@@ -135,6 +145,10 @@ export default function IssueDetailPage(): JSX.Element {
           )}
         </div>
       )}
+      <Prompt
+        message="You have unsaved work. Are you sure you want to leave?"
+        when={editing}
+      />
     </PageWidth>
   );
 }
