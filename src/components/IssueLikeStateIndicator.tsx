@@ -8,7 +8,7 @@ const indicatorStyle = (small: boolean) => css`
   border-radius: 100px;
   ${small && "font-size: 80%"};
   font-weight: bold;
-  color: #fafafa;
+  color: #ffffff;
 `;
 
 export default function IssueLikeStateIndicator({
