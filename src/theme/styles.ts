@@ -67,7 +67,6 @@ export const listItemContainerStyle = css`
   align-items: center;
   justify-content: space-between;
   padding: 10px 16px;
-  cursor: pointer;
 
   > :last-child {
     margin-left: 16px;
@@ -75,6 +74,13 @@ export const listItemContainerStyle = css`
 
   a {
     text-decoration: none;
+    color: initial;
+    font-weight: bold;
+  }
+
+  a:hover,
+  a:hover:visited {
+    color: #1753ea;
   }
 
   a:visited {
