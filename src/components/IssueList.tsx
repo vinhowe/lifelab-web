@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/core";
 import React from "react";
 import IssueListItem from "./IssueListItem";
 import { Issue } from "../types/issue";
@@ -10,6 +10,11 @@ import {
   Droppable,
   DropResult,
 } from "react-beautiful-dnd";
+
+const draggingItemStyle = css`
+  border: solid #ccc 1px;
+  border-radius: 4px;
+`;
 
 // a little function to help us with reordering the result
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -68,6 +73,7 @@ export default function IssueList({
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      css={snapshot.isDragging ? draggingItemStyle : undefined}
                     >
                       <IssueListItem key={index} issue={issue} labId={labId} />
                     </div>
