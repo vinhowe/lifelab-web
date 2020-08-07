@@ -7,7 +7,7 @@ A self-improvement service. Currently just a toy. The big ideas are:
 - Capturing pain
 - Experimenting with habits to see what works for you
 
-Software development is my hammer. LifeLab is my take on personal improvement using ideas from software development. Here's how it works:
+LifeLab is my take on personal improvement using ideas from agile software development. Here's how it works:
 
 - Capture issues related to pain points or areas for improvement in your life.
 - Create experiments that run for 2-week periods--"iterations."
