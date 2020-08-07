@@ -1,23 +1,82 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import React from "react";
 import IssueListItem from "./IssueListItem";
 import { Issue } from "../types/issue";
 import { listStyle } from "../theme/styles";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+
+// a little function to help us with reordering the result
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const reorder = <T1 extends any>(
+  list: T1[],
+  startIndex: number,
+  endIndex: number
+) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
 
 export default function IssueList({
   issues,
   labId,
+  onIssuesReorder,
 }: {
   issues: Issue[];
   labId: number;
+  onIssuesReorder?: (issues: number[]) => void;
 }): JSX.Element {
+  const onDragEnd = (result: DropResult) => {
+    // dropped outside the list
+    if (!result.destination || !onIssuesReorder) {
+      return;
+    }
+
+    onIssuesReorder(
+      reorder(issues, result.source.index, result.destination.index).map(
+        ({ id }) => id
+      )
+    );
+  };
+
   return (
-    <div css={listStyle}>
-      {issues.length > 0 &&
-        issues.map((issue, index) => (
-          <IssueListItem key={index} issue={issue} labId={labId} />
-        ))}
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            css={listStyle}
+          >
+            {issues.length > 0 &&
+              issues.map((issue, index) => (
+                <Draggable
+                  key={issue.id}
+                  draggableId={issue.id.toString()}
+                  index={index}
+                >
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <IssueListItem key={index} issue={issue} labId={labId} />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 }

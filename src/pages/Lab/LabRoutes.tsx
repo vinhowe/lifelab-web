@@ -9,7 +9,7 @@ import {
 import LabPage from "./LabPage";
 import IssueDetailPage from "./Issue/IssueDetailPage";
 import NewIssuePage from "./Issue/NewIssuePage";
-import IssueListPage from "./Issue/IssuesListPage";
+import IssueListPage from "./Issue/LabIssuesListPage";
 import LabNav from "../../components/LabNav/LabNav";
 import PageWidth from "../../components/PageWidth";
 import ExperimentsListPage from "./Experiment/ExperimentsListPage";
