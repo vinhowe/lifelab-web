@@ -76,7 +76,11 @@ export default function CheckInTodayPage(): JSX.Element {
           </div>
           <h3>Active experiments</h3>
           <p>Tweak these as needed.</p>
-          <ExperimentList labId={labId} experiments={experiments} />
+          <ExperimentList
+            labId={labId}
+            experiments={experiments}
+            openInNewTab
+          />
           <h3>Retrospective</h3>
           <EditPreview
             value={checkIn.retrospective || checkInEdits.retrospective || ""}

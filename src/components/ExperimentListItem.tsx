@@ -9,13 +9,20 @@ import ExperimentStateIndicator from "./ExperimentStateIndicator";
 export default function ExperimentListItem({
   experiment: { title, state, number },
   labId,
+  openInNewTab,
 }: {
   experiment: Experiment;
   labId: number;
+  openInNewTab?: boolean;
 }): JSX.Element {
   return (
     <div css={listItemContainerStyle}>
-      <Link to={`/labs/${labId}/experiments/${number}`}>{title}</Link>
+      <Link
+        to={`/labs/${labId}/experiments/${number}`}
+        target={openInNewTab ? "_blank" : undefined}
+      >
+        {title}
+      </Link>
       <ExperimentStateIndicator state={state} small />
     </div>
   );

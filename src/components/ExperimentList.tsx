@@ -1,8 +1,6 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import React from "react";
-import IssueListItem from "./IssueListItem";
-import { Issue } from "../types/issue";
 import { listStyle } from "../theme/styles";
 import { Experiment } from "../types/experiment";
 import ExperimentListItem from "./ExperimentListItem";
@@ -10,9 +8,11 @@ import ExperimentListItem from "./ExperimentListItem";
 export default function ExperimentList({
   experiments,
   labId,
+  openInNewTab,
 }: {
   experiments: Experiment[];
   labId: number;
+  openInNewTab?: boolean;
 }): JSX.Element {
   return (
     <div css={listStyle}>
@@ -22,6 +22,7 @@ export default function ExperimentList({
             key={index}
             experiment={experiment}
             labId={labId}
+            openInNewTab={openInNewTab}
           />
         ))}
     </div>
