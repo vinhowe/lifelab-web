@@ -4,10 +4,19 @@ import { Lab, LabEdits } from "../types/lab";
 
 export async function getLab(labId: number): Promise<Lab> {
   // TODO: Abstract error handling here
-  return (await axios.get(`${API_ROOT}/api/dev/labs/${labId}/`)).data;
+  return (
+    await axios.get(
+      `${API_ROOT(window.location.hostname)}/api/dev/labs/${labId}/`
+    )
+  ).data;
 }
 
 export async function updateLab(labId: number, edits?: LabEdits): Promise<Lab> {
   // TODO: Abstract error handling here
-  return (await axios.patch(`${API_ROOT}/api/dev/labs/${labId}/`, edits)).data;
+  return (
+    await axios.patch(
+      `${API_ROOT(window.location.hostname)}/api/dev/labs/${labId}/`,
+      edits
+    )
+  ).data;
 }

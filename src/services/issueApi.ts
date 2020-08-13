@@ -4,7 +4,11 @@ import { API_ROOT } from "./commonApi";
 
 export async function getIssues(labId: number): Promise<Issue[]> {
   // TODO: Abstract error handling here
-  return (await axios.get(`${API_ROOT}/api/dev/labs/${labId}/issues/`)).data;
+  return (
+    await axios.get(
+      `${API_ROOT(window.location.hostname)}/api/dev/labs/${labId}/issues/`
+    )
+  ).data;
 }
 
 export async function getIssue(
@@ -13,7 +17,11 @@ export async function getIssue(
 ): Promise<Issue> {
   // TODO: Abstract error handling here
   return (
-    await axios.get(`${API_ROOT}/api/dev/labs/${labId}/issues/${issueNumber}/`)
+    await axios.get(
+      `${API_ROOT(
+        window.location.hostname
+      )}/api/dev/labs/${labId}/issues/${issueNumber}/`
+    )
   ).data;
 }
 
@@ -25,7 +33,9 @@ export async function updateIssue(
   // TODO: Abstract error handling here
   return (
     await axios.patch(
-      `${API_ROOT}/api/dev/labs/${labId}/issues/${issueNumber}/`,
+      `${API_ROOT(
+        window.location.hostname
+      )}/api/dev/labs/${labId}/issues/${issueNumber}/`,
       edits
     )
   ).data;
@@ -35,6 +45,10 @@ export async function createIssue(
   labId: number,
   issue: NewIssue
 ): Promise<Issue> {
-  return (await axios.post(`${API_ROOT}/api/dev/labs/${labId}/issues/`, issue))
-    .data;
+  return (
+    await axios.post(
+      `${API_ROOT(window.location.hostname)}/api/dev/labs/${labId}/issues/`,
+      issue
+    )
+  ).data;
 }
