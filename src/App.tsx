@@ -4,7 +4,7 @@ import LabRoutes from "./pages/Lab/LabRoutes";
 
 export default function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/lifelab">
       <Switch>
         <Route path="/labs/:labId">
           <LabRoutes />

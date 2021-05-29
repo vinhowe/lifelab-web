@@ -22,37 +22,35 @@ export default function LabRoutes(): JSX.Element {
   const { labId } = useParams();
   return (
     <>
-      <BrowserRouter>
-        <PageWidth>
-          <LabNav labId={labId} />
-        </PageWidth>
-        <Switch>
-          <Route exact path={`${path}/`}>
-            <LabPage />
-          </Route>
-          <Route exact path={`${path}/issues`}>
-            <IssueListPage />
-          </Route>
-          <Route path={`${path}/issues/new`}>
-            <NewIssuePage />
-          </Route>
-          <Route path={`${path}/checkin`}>
-            <CheckInTodayPage />
-          </Route>
-          <Route path={`${path}/issues/:issueNumber`}>
-            <IssueDetailPage />
-          </Route>
-          <Route exact path={`${path}/experiments`}>
-            <ExperimentsListPage />
-          </Route>
-          <Route path={`${path}/experiments/new`}>
-            <NewExperimentPage />
-          </Route>
-          <Route path={`${path}/experiments/:experimentNumber`}>
-            <ExperimentDetailPage />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <PageWidth>
+        <LabNav labId={labId} />
+      </PageWidth>
+      <Switch>
+        <Route exact path={`${path}/`}>
+          <LabPage />
+        </Route>
+        <Route exact path={`${path}/issues`}>
+          <IssueListPage />
+        </Route>
+        <Route path={`${path}/issues/new`}>
+          <NewIssuePage />
+        </Route>
+        <Route path={`${path}/checkin`}>
+          <CheckInTodayPage />
+        </Route>
+        <Route path={`${path}/issues/:issueNumber`}>
+          <IssueDetailPage />
+        </Route>
+        <Route exact path={`${path}/experiments`}>
+          <ExperimentsListPage />
+        </Route>
+        <Route path={`${path}/experiments/new`}>
+          <NewExperimentPage />
+        </Route>
+        <Route path={`${path}/experiments/:experimentNumber`}>
+          <ExperimentDetailPage />
+        </Route>
+      </Switch>
     </>
   );
 }
