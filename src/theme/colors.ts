@@ -2,6 +2,16 @@ export const colors = {
   highlightBorderColor: "rgba(43, 222, 255, 0.3)",
 };
 
+export const tabColors = {
+  default: "#e2e2e2",
+  defaultBorder: "#b8b8b8",
+  hover: "#f0f0f0",
+  hoverBorder: "#c8c8c8",
+  active: "#fdfdfd",
+  activeBorder: "#d0d0d0",
+  disabled: "#f2f2f2",
+};
+
 export const buttonColors = {
   white: {
     default: "#fdfdfd",

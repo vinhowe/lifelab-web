@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx, SerializedStyles } from "@emotion/core";
-import { buttonColors, colors } from "./colors";
+import { buttonColors, colors, tabColors } from "./colors";
 
 export const sansFontFamily = css`
   font-family: "Lato", sans-serif;
@@ -10,14 +10,8 @@ export const tabStyle = (
   active: boolean,
   small?: boolean
 ): SerializedStyles => css`
-  background: ${active
-    ? buttonColors.white.active
-    : buttonColors.white.default};
-  border: solid
-    ${active
-      ? buttonColors.white.activeBorder
-      : buttonColors.white.defaultBorder}
-    1px;
+  background: ${active ? tabColors.active : tabColors.default};
+  border: solid ${active ? tabColors.activeBorder : tabColors.defaultBorder} 1px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom: none;
