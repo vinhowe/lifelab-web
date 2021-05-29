@@ -6,7 +6,7 @@ export async function getIssues(labId: number): Promise<Issue[]> {
   // TODO: Abstract error handling here
   return (
     await axios.get(
-      `${API_ROOT(window.location.hostname)}/api/dev/labs/${labId}/issues/`
+      `${API_ROOT(window.location.hostname)}/dev/labs/${labId}/issues/`
     )
   ).data;
 }
@@ -20,7 +20,7 @@ export async function getIssue(
     await axios.get(
       `${API_ROOT(
         window.location.hostname
-      )}/api/dev/labs/${labId}/issues/${issueNumber}/`
+      )}/dev/labs/${labId}/issues/${issueNumber}/`
     )
   ).data;
 }
@@ -35,7 +35,7 @@ export async function updateIssue(
     await axios.patch(
       `${API_ROOT(
         window.location.hostname
-      )}/api/dev/labs/${labId}/issues/${issueNumber}/`,
+      )}/dev/labs/${labId}/issues/${issueNumber}/`,
       edits
     )
   ).data;
@@ -47,7 +47,7 @@ export async function createIssue(
 ): Promise<Issue> {
   return (
     await axios.post(
-      `${API_ROOT(window.location.hostname)}/api/dev/labs/${labId}/issues/`,
+      `${API_ROOT(window.location.hostname)}/dev/labs/${labId}/issues/`,
       issue
     )
   ).data;

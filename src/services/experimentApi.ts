@@ -10,7 +10,7 @@ export async function getExperiments(labId: number): Promise<Experiment[]> {
   // TODO: Abstract error handling here
   return (
     await axios.get(
-      `${API_ROOT(window.location.hostname)}/api/dev/labs/${labId}/experiments/`
+      `${API_ROOT(window.location.hostname)}/dev/labs/${labId}/experiments/`
     )
   ).data;
 }
@@ -24,7 +24,7 @@ export async function getExperiment(
     await axios.get(
       `${API_ROOT(
         window.location.hostname
-      )}/api/dev/labs/${labId}/experiments/${experimentNumber}/`
+      )}/dev/labs/${labId}/experiments/${experimentNumber}/`
     )
   ).data;
 }
@@ -39,7 +39,7 @@ export async function updateExperiment(
     await axios.patch(
       `${API_ROOT(
         window.location.hostname
-      )}/api/dev/labs/${labId}/experiments/${experimentNumber}/`,
+      )}/dev/labs/${labId}/experiments/${experimentNumber}/`,
       edits
     )
   ).data;
@@ -53,7 +53,7 @@ export async function createExperiment(
     await axios.post(
       `${API_ROOT(
         window.location.hostname
-      )}/api/dev/labs/${labId}/experiments/`,
+      )}/dev/labs/${labId}/experiments/`,
       experiment
     )
   ).data;

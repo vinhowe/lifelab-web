@@ -6,9 +6,7 @@ export async function getCheckInToday(labId: number): Promise<CheckIn> {
   // TODO: Abstract error handling here
   return (
     await axios.get(
-      `${API_ROOT(
-        window.location.hostname
-      )}/api/dev/labs/${labId}/check-ins/today/`
+      `${API_ROOT(window.location.hostname)}/dev/labs/${labId}/check-ins/today/`
     )
   ).data;
 }
@@ -22,7 +20,7 @@ export async function updateCheckInToday(
     await axios.patch(
       `${API_ROOT(
         window.location.hostname
-      )}/api/dev/labs/${labId}/check-ins/today/`,
+      )}/dev/labs/${labId}/check-ins/today/`,
       edits
     )
   ).data;
