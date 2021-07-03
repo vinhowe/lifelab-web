@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { Prompt, useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Issue, IssueEdits, IssueState } from "../../../types/issue";
 import IssueStateIndicator from "../../../components/IssueStateIndicator";
 import PageWidth from "../../../components/PageWidth";
