@@ -1,3 +1,5 @@
+import { ApiObject } from "./api";
+
 export interface NewExperiment {
   title: string;
   description?: string;
@@ -5,7 +7,7 @@ export interface NewExperiment {
   endDate?: string;
 }
 
-export interface Experiment {
+export interface Experiment extends ApiObject {
   state: ExperimentState;
   title: string;
   description: string;
@@ -13,7 +15,6 @@ export interface Experiment {
   number: number;
   created: string;
   endDate: string;
-  url: string;
 }
 
 export interface ExperimentEdits {

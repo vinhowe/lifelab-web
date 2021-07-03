@@ -1,16 +1,17 @@
+import { ApiObject } from "./api";
+
 export interface NewIssue {
   title: string;
   description?: string;
 }
 
-export interface Issue {
+export interface Issue extends ApiObject {
   state: IssueState;
   title: string;
   description: string;
   number: number;
   id: number;
   created: string;
-  url: string;
 }
 
 export interface IssueEdits {
@@ -28,13 +29,12 @@ export const initialNewIssue: NewIssue = {
   title: "",
 };
 
-export interface CheckIn {
+export interface CheckIn extends ApiObject {
   complete: boolean;
   experiments: string[];
   number: number;
   retrospective: string;
   created: string;
-  url: string;
 }
 
 export interface CheckInEdits {
