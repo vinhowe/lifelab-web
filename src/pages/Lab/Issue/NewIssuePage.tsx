@@ -14,7 +14,6 @@ const issueHeadingContainerStyle = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 `;
 
 const submitButtonContainerStyle = css`

@@ -40,6 +40,7 @@ const experimentSubheadingContainerStyle = css`
 
 const editButtonsContainerStyle = css`
   display: flex;
+
   button {
     margin-left: 8px;
   }

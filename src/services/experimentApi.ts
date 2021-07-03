@@ -56,9 +56,7 @@ export async function createExperiment(
 ): Promise<Experiment> {
   return (
     await axios.post(
-      `${API_ROOT(
-        window.location.hostname
-      )}/dev/labs/${labId}/experiments/`,
+      `${API_ROOT(window.location.hostname)}/dev/labs/${labId}/experiments/`,
       experiment
     )
   ).data;

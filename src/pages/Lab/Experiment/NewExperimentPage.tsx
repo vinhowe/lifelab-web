@@ -25,9 +25,8 @@ const submitButtonContainerStyle = css`
 export default function NewExperimentPage(): JSX.Element {
   const { labId } = useParams();
   const history = useHistory();
-  const [experiment, setExperiment] = useState<NewExperiment>(
-    initialNewExperiment
-  );
+  const [experiment, setExperiment] =
+    useState<NewExperiment>(initialNewExperiment);
 
   const validate = () => !!experiment.title && !!experiment.terms;
 
@@ -70,7 +69,7 @@ export default function NewExperimentPage(): JSX.Element {
           <TextField
             type="date"
             value={experiment?.endDate || ""}
-            onChange={(endDate) => setExperiment({ ...experiment, endDate})}
+            onChange={(endDate) => setExperiment({ ...experiment, endDate })}
           />
           <h3>Description</h3>
           <EditPreview
