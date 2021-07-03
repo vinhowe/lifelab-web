@@ -147,13 +147,13 @@ export default function IssueDetailPage(): JSX.Element {
                     setIssueEdits({
                       ...issueEdits,
                       state:
-                        (issueEdits || issue).state === IssueState.OPEN
+                        (issueEdits?.state || issue.state) === IssueState.OPEN
                           ? IssueState.CLOSED
                           : IssueState.OPEN,
                     })
                   }
                 >
-                  {(issueEdits || issue).state === IssueState.OPEN
+                  {(issueEdits?.state || issue.state) === IssueState.OPEN
                     ? "Close"
                     : "Open"}{" "}
                   this issue
