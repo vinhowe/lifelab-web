@@ -56,11 +56,15 @@ export const listStyle = css`
   }
 `;
 
-export const listItemContainerStyle = css`
+export const smallListStyle = css``;
+
+export const listItemContainerStyle = (
+  small?: boolean
+): SerializedStyles => css`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
+  padding: ${small ? "2px 10px" : "10px 16px"};
 
   > :last-child {
     margin-left: 16px;
@@ -69,7 +73,8 @@ export const listItemContainerStyle = css`
   a {
     text-decoration: none;
     color: initial;
-    font-weight: bold;
+    font-weight: ${small ? "normal" : "bold"};
+    ${small ? "font-size: 14px" : ""}
   }
 
   a:hover,
