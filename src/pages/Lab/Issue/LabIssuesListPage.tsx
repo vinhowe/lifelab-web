@@ -2,7 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import { useHistory, useParams } from "react-router-dom";
 import PageWidth from "../../../components/PageWidth";
-import IssueList from "../../../components/IssueList";
+import ReorderableIssueList from "../../../components/ReorderableIssueList";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getIssues } from "../../../services/issueApi";
 import { Issue } from "../../../types/issue";
@@ -88,7 +88,7 @@ export default function LabIssuesListPage(): JSX.Element {
         </div>
       </div>
       {orderedIssues !== undefined && (
-        <IssueList
+        <ReorderableIssueList
           labId={labId}
           issues={orderedIssues}
           onIssuesReorder={onIssuesReorder}

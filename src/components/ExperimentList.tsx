@@ -1,30 +1,31 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React from "react";
-import { listStyle } from "../theme/styles";
 import { Experiment } from "../types/experiment";
 import ExperimentListItem from "./ExperimentListItem";
+import LabItemList from "./LabItemList";
 
 export default function ExperimentList({
   experiments,
   labId,
+  small,
   openInNewTab,
 }: {
   experiments: Experiment[];
   labId: number;
+  small?: boolean;
   openInNewTab?: boolean;
 }): JSX.Element {
   return (
-    <div css={listStyle}>
-      {experiments.length > 0 &&
-        experiments.map((experiment, index) => (
-          <ExperimentListItem
-            key={index}
-            experiment={experiment}
-            labId={labId}
-            openInNewTab={openInNewTab}
-          />
-        ))}
-    </div>
+    <LabItemList items={experiments}>
+      {(experiment, index) => (
+        <ExperimentListItem
+          key={index}
+          experiment={experiment}
+          labId={labId}
+          small={small}
+          openInNewTab={openInNewTab}
+        />
+      )}
+    </LabItemList>
   );
 }

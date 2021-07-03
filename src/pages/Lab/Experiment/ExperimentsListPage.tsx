@@ -2,10 +2,7 @@
 import { css, jsx } from "@emotion/core";
 import { useHistory, useParams } from "react-router-dom";
 import PageWidth from "../../../components/PageWidth";
-import IssueList from "../../../components/IssueList";
 import { useEffect, useState } from "react";
-import { getIssues } from "../../../services/issueApi";
-import { Issue } from "../../../types/issue";
 import Button from "../../../components/Button";
 import { buttonColors } from "../../../theme/colors";
 import TextField from "../../../components/TextField";
