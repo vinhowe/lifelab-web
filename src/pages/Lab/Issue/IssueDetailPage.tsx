@@ -11,6 +11,11 @@ import TextField from "../../../components/TextField";
 import ReactMarkdown from "react-markdown";
 import EditPreview from "../../../components/EditPreview/EditPreview";
 import preventUnloadEventHandler from "../../../utilities/preventUnloadEventHandler";
+import LabItemChecklist from "../../../components/LabItemChecklist";
+import LabItemList from "../../../components/LabItemList";
+import { Experiment } from "../../../types/experiment";
+import { getExperiments } from "../../../services/experimentApi";
+import ExperimentListItem from "../../../components/ExperimentListItem";
 
 const issueHeadingContainerStyle = css`
   display: flex;
@@ -46,6 +51,28 @@ export default function IssueDetailPage(): JSX.Element {
   const [issue, setIssue] = useState<Issue>();
   const [issueEdits, setIssueEdits] = useState<IssueEdits>();
   const editing = issueEdits !== undefined;
+  const [linkedExperiments, setLinkedExperiments] = useState<Experiment[]>();
+
+  useEffect(() => {
+    // TODO: Fix this incredibly inefficient way of doing things
+    getExperiments(labId).then((experiments) => {
+      setLinkedExperiments(
+        experiments.filter((experiment) =>
+          issue?.experiments.includes(experiment.url)
+        )
+      );
+    });
+  }, [issue, labId]);
+
+  const updateLinkedExperiements = useCallback(
+    async (newLinkedExperiments: Experiment[]) => {
+      await updateIssue(labId, issueNumber, {
+        experiments: newLinkedExperiments.map((issue) => issue.url),
+      });
+      setLinkedExperiments(newLinkedExperiments);
+    },
+    [issueNumber, labId]
+  );
 
   const toggleEditing = async () => {
     if (!editing) {
@@ -74,6 +101,11 @@ export default function IssueDetailPage(): JSX.Element {
   useEffect(() => {
     getIssue(labId, issueNumber).then(setIssue);
   }, []);
+
+  const getExperimentsCallback = useCallback(
+    () => getExperiments(labId),
+    [labId]
+  );
 
   return (
     <PageWidth>
@@ -132,6 +164,42 @@ export default function IssueDetailPage(): JSX.Element {
               Created {new Date(issue.created).toDateString()}
             </span>
           </div>
+          {(linkedExperiments?.length || editing) && (
+            <h3>Linked experiments</h3>
+          )}
+          <div>
+            {linkedExperiments &&
+              (editing ? (
+                <LabItemChecklist
+                  loadItemsFn={getExperimentsCallback}
+                  selected={linkedExperiments}
+                  onSelectedChanged={async (items) => {
+                    await updateLinkedExperiements(items);
+                  }}
+                >
+                  {(value, index) => (
+                    <ExperimentListItem
+                      key={index}
+                      experiment={value}
+                      labId={labId}
+                      small
+                    />
+                  )}
+                </LabItemChecklist>
+              ) : (
+                <LabItemList items={linkedExperiments}>
+                  {(value, index) => (
+                    <ExperimentListItem
+                      key={index}
+                      experiment={value}
+                      labId={labId}
+                      small
+                    />
+                  )}
+                </LabItemList>
+              ))}
+          </div>
+          {(editing || linkedExperiments?.length != 0) && <h3>Description</h3>}
           {editing ? (
             <EditPreview
               value={issueEdits?.description || issue.description}

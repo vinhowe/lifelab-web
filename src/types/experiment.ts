@@ -15,6 +15,7 @@ export interface Experiment extends ApiObject {
   number: number;
   created: string;
   endDate: string;
+  issues: string[];
 }
 
 export interface ExperimentEdits {
@@ -23,6 +24,7 @@ export interface ExperimentEdits {
   endDate?: string;
   description?: string;
   terms?: string;
+  issues?: string[];
 }
 
 export enum ExperimentState {

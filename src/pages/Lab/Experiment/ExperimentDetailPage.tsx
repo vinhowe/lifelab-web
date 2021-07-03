@@ -1,17 +1,13 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { Prompt, useParams } from "react-router-dom";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PageWidth from "../../../components/PageWidth";
 import Button from "../../../components/Button";
 import TextField from "../../../components/TextField";
 import ReactMarkdown from "react-markdown";
 import EditPreview from "../../../components/EditPreview/EditPreview";
-import {
-  Experiment,
-  ExperimentEdits,
-  ExperimentState,
-} from "../../../types/experiment";
+import { Experiment, ExperimentEdits } from "../../../types/experiment";
 import {
   getExperiment,
   updateExperiment,
@@ -19,6 +15,11 @@ import {
 import ExperimentStateIndicator from "../../../components/ExperimentStateIndicator";
 import ExperimentStateSelector from "../../../components/ExperimentStateSelector";
 import preventUnloadEventHandler from "../../../utilities/preventUnloadEventHandler";
+import { getIssues } from "../../../services/issueApi";
+import { Issue } from "../../../types/issue";
+import LabItemChecklist from "../../../components/LabItemChecklist";
+import IssueListItem from "../../../components/IssueListItem";
+import LabItemList from "../../../components/LabItemList";
 
 const experimentHeadingContainerStyle = css`
   display: flex;
@@ -54,6 +55,26 @@ export default function ExperimentDetailPage(): JSX.Element {
   const [experiment, setExperiment] = useState<Experiment>();
   const [experimentEdits, setExperimentEdits] = useState<ExperimentEdits>();
   const editing = experimentEdits !== undefined;
+  const [linkedIssues, setLinkedIssues] = useState<Issue[]>();
+
+  useEffect(() => {
+    // TODO: Fix this incredibly inefficient way of doing things
+    getIssues(labId).then((issues) => {
+      setLinkedIssues(
+        issues.filter((issue) => experiment?.issues.includes(issue.url))
+      );
+    });
+  }, [experiment, labId]);
+
+  const updateLinkedIssues = useCallback(
+    async (newLinkedIssues: Issue[]) => {
+      await updateExperiment(labId, experimentNumber, {
+        issues: newLinkedIssues.map((issue) => issue.url),
+      });
+      setLinkedIssues(newLinkedIssues);
+    },
+    [experimentNumber, labId]
+  );
 
   const toggleEditing = async () => {
     if (!editing) {
@@ -82,6 +103,8 @@ export default function ExperimentDetailPage(): JSX.Element {
     // noinspection JSIgnoredPromiseFromCall
     toggleEditing();
   };
+
+  const getIssuesCallback = useCallback(() => getIssues(labId), []);
 
   useEffect(() => {
     getExperiment(labId, experimentNumber).then(setExperiment);
@@ -140,6 +163,39 @@ export default function ExperimentDetailPage(): JSX.Element {
                 {new Date(experiment.endDate).toDateString()}
               </span>
             )}
+          </div>
+          {(linkedIssues?.length || editing) && <h3>Linked issues</h3>}
+          <div>
+            {linkedIssues &&
+              (editing ? (
+                <LabItemChecklist
+                  loadItemsFn={getIssuesCallback}
+                  selected={linkedIssues}
+                  onSelectedChanged={async (items) => {
+                    await updateLinkedIssues(items);
+                  }}
+                >
+                  {(value, index) => (
+                    <IssueListItem
+                      key={index}
+                      issue={value}
+                      labId={labId}
+                      small
+                    />
+                  )}
+                </LabItemChecklist>
+              ) : (
+                <LabItemList items={linkedIssues}>
+                  {(value, index) => (
+                    <IssueListItem
+                      key={index}
+                      issue={value}
+                      labId={labId}
+                      small
+                    />
+                  )}
+                </LabItemList>
+              ))}
           </div>
           {editing && <h3>End date</h3>}
           {editing && (

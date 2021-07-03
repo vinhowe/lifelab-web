@@ -12,12 +12,14 @@ export interface Issue extends ApiObject {
   number: number;
   id: number;
   created: string;
+  experiments: string[];
 }
 
 export interface IssueEdits {
   state?: IssueState;
   title?: string;
   description?: string;
+  experiments?: string[];
 }
 
 export enum IssueState {

@@ -40,7 +40,12 @@ export async function updateExperiment(
       `${API_ROOT(
         window.location.hostname
       )}/dev/labs/${labId}/experiments/${experimentNumber}/`,
-      edits
+      edits,
+      {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      }
     )
   ).data;
 }

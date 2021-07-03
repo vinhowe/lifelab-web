@@ -36,7 +36,12 @@ export async function updateIssue(
       `${API_ROOT(
         window.location.hostname
       )}/dev/labs/${labId}/issues/${issueNumber}/`,
-      edits
+      edits,
+      {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      }
     )
   ).data;
 }
