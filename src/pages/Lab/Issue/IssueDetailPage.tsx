@@ -166,26 +166,22 @@ export default function IssueDetailPage(): JSX.Element {
           </div>
           <div css={issueSubheadingContainerStyle}>
             <IssueStateIndicator state={issueEdits?.state || issue.state} />
-            {editing && (
-              <span style={{ marginLeft: "10px" }}>
-                <Button
-                  onClick={() =>
-                    setIssueEdits({
-                      ...issueEdits,
-                      state:
-                        (issueEdits?.state || issue.state) === IssueState.OPEN
-                          ? IssueState.CLOSED
-                          : IssueState.OPEN,
-                    })
-                  }
-                >
-                  {(issueEdits?.state || issue.state) === IssueState.OPEN
-                    ? "Close"
-                    : "Open"}{" "}
-                  this issue
-                </Button>
-              </span>
-            )}
+            <div style={{ marginLeft: "10px", display: "inline-block" }}>
+              <Button
+                onClick={() =>
+                  updateIssueStatus(
+                    (issueEdits?.state || issue.state) === IssueState.OPEN
+                      ? IssueState.CLOSED
+                      : IssueState.OPEN
+                  )
+                }
+              >
+                {(issueEdits?.state || issue.state) === IssueState.OPEN
+                  ? "Close"
+                  : "Open"}{" "}
+                this issue
+              </Button>
+            </div>
             <span css={issueSubheadingExtraInfoStyle}>
               Created {new Date(issue.created).toDateString()}
             </span>
