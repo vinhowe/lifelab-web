@@ -206,9 +206,7 @@ export default function IssueDetailPage(): JSX.Element {
                   <LabItemChecklist
                     loadItemsFn={getExperimentsCallback}
                     selected={linkedExperiments}
-                    onSelectedChanged={async (items) => {
-                      await updateLinkedExperiments(items);
-                    }}
+                    onSelectedChanged={updateLinkedExperiments}
                   >
                     {(value, index) => (
                       <ExperimentListItem

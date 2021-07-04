@@ -35,16 +35,17 @@ export default function LabItemChecklist<T extends ApiObject>({
   }, [loadItemsFn]);
 
   useEffect(() => {
+    const newSelectedItems = new Set<string>();
     items.forEach((value) => {
       if (selected.find(({ url }) => url === value.url) === undefined) {
         return;
       }
 
-      selectedItems.add(value.url);
+      newSelectedItems.add(value.url);
     });
 
-    setSelectedItems(new Set(selectedItems));
-  }, [items, selected, selectedItems]);
+    setSelectedItems(newSelectedItems);
+  }, [items, selected]);
 
   return (
     <div css={smallListStyle}>
