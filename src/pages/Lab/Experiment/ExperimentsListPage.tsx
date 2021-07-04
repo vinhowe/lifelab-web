@@ -28,7 +28,7 @@ export default function ExperimentsListPage(): JSX.Element {
 
   useEffect(() => {
     getExperiments(labId).then(setExperiments);
-  }, []);
+  }, [labId]);
 
   return (
     <PageWidth>

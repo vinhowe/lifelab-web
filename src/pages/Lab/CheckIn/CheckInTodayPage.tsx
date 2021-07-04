@@ -30,7 +30,7 @@ export default function CheckInTodayPage(): JSX.Element {
 
   useEffect(() => {
     getCheckInToday(labId).then(setCheckIn);
-  }, []);
+  }, [labId]);
 
   useEffect(() => {
     if (!checkIn || experiments) {
@@ -42,7 +42,7 @@ export default function CheckInTodayPage(): JSX.Element {
         async (url) => (await axios.get<Experiment>(url)).data
       )
     ).then(setExperiments);
-  }, [checkIn]);
+  }, [experiments, checkIn]);
 
   useEffect(() => {
     const hasEdits = Object.keys(checkInEdits).length > 0;
@@ -63,7 +63,7 @@ export default function CheckInTodayPage(): JSX.Element {
     await updateCheckInToday(labId, checkInEdits);
     setCheckIn({ ...checkIn, ...(checkInEdits as CheckIn) });
     setCheckInEdits({});
-  }, [labId, checkInEdits]);
+  }, [labId, checkIn, checkInEdits]);
 
   return (
     <PageWidth>

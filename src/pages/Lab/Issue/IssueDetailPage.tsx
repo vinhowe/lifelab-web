@@ -101,7 +101,7 @@ export default function IssueDetailPage(): JSX.Element {
 
   useEffect(() => {
     getIssue(labId, issueNumber).then(setIssue);
-  }, []);
+  }, [issueNumber, labId]);
 
   const getExperimentsCallback = useCallback(
     () => getExperiments(labId),

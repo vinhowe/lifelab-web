@@ -105,14 +105,14 @@ export default function ExperimentDetailPage(): JSX.Element {
     toggleEditing();
   };
 
-  const getIssuesCallback = useCallback(() => getIssues(labId), []);
+  const getIssuesCallback = useCallback(() => getIssues(labId), [labId]);
 
   useEffect(() => {
     getExperiment(labId, experimentNumber).then(setExperiment);
 
     return () =>
       window.removeEventListener("beforeunload", preventUnloadEventHandler);
-  }, []);
+  }, [labId, experimentNumber]);
 
   return (
     <PageWidth>

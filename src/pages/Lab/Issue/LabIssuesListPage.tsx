@@ -34,7 +34,7 @@ export default function LabIssuesListPage(): JSX.Element {
     if (!issues) {
       getIssues(labId).then(setIssues);
     }
-  }, [issues, queueNumbers, orderedIssues]);
+  }, [labId, filterFunction, issues]);
 
   const updateQueue = useCallback(
     (newQueueNumbers: number[]) => {

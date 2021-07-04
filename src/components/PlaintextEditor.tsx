@@ -62,7 +62,7 @@ export default function PlaintextEditor({
     ) {
       Transforms.select(editor, Editor.start(editor, []));
     }
-  }, [editor, internalValue]);
+  }, [autoFocus, editor, internalValue]);
 
   useEffect(() => {
     setInternalValue(deserialize(value));

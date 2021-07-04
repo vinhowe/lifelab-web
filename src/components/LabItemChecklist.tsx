@@ -44,7 +44,7 @@ export default function LabItemChecklist<T extends ApiObject>({
     });
 
     setSelectedItems(new Set(selectedItems));
-  }, [items, selected]);
+  }, [items, selected, selectedItems]);
 
   return (
     <div css={smallListStyle}>
