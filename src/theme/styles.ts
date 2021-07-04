@@ -58,6 +58,10 @@ export const listStyle = css`
 
 export const smallListStyle = css``;
 
+export const itemListPageSectionStyle = css`
+  margin-bottom: 36px;
+`;
+
 export const listItemContainerStyle = (
   small?: boolean
 ): SerializedStyles => css`

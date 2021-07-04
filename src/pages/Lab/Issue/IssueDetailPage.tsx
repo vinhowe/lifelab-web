@@ -68,7 +68,7 @@ export default function IssueDetailPage(): JSX.Element {
     });
   }, [issue, labId]);
 
-  const updateLinkedExperiements = useCallback(
+  const updateLinkedExperiments = useCallback(
     async (newLinkedExperiments: Experiment[]) => {
       await updateIssue(labId, issueNumber, {
         experiments: newLinkedExperiments.map((issue) => issue.url),
@@ -76,6 +76,21 @@ export default function IssueDetailPage(): JSX.Element {
       setLinkedExperiments(newLinkedExperiments);
     },
     [issueNumber, labId]
+  );
+
+  const updateIssueStatus = useCallback(
+    async (state: IssueState) => {
+      if (!issue) {
+        return;
+      }
+
+      const responseIssue = await updateIssue(labId, issueNumber, {
+        state,
+      });
+
+      setIssue({ ...issue, state: responseIssue.state });
+    },
+    [issue, issueNumber, labId]
   );
 
   const openLinkedExperimentsDialog = useCallback(
