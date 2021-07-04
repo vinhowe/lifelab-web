@@ -36,7 +36,7 @@ export default function LabItemChecklist<T extends ApiObject>({
 
   useEffect(() => {
     items.forEach((value) => {
-      if (selected.find(({ url }) => url == value.url) == undefined) {
+      if (selected.find(({ url }) => url === value.url) === undefined) {
         return;
       }
 
