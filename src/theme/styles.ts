@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { css, jsx, SerializedStyles } from "@emotion/core";
-import { buttonColors, colors, tabColors } from "./colors";
+import { css, SerializedStyles } from "@emotion/core";
+import { colors, tabColors } from "./colors";
 
 export const sansFontFamily = css`
   font-family: "Lato", sans-serif;

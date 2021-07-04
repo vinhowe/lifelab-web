@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React from "react";
 import { Link } from "react-router-dom";
 import { listItemContainerStyle } from "../theme/styles";
 import { Experiment } from "../types/experiment";

@@ -2,7 +2,6 @@ import React from "react";
 import IssueLikeStateIndicator, {
   IssueLikeStateColor,
 } from "./IssueLikeStateIndicator";
-import { IssueState } from "../types/issue";
 import { ExperimentState } from "../types/experiment";
 
 export default function ExperimentStateIndicator({

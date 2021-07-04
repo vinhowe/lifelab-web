@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import PageWidth from "../../../components/PageWidth";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Prompt, useParams } from "react-router-dom";
 import { CheckIn, CheckInEdits } from "../../../types/issue";
 import {
@@ -12,7 +12,6 @@ import { Experiment } from "../../../types/experiment";
 import axios from "axios";
 import ExperimentList from "../../../components/ExperimentList";
 import EditPreview from "../../../components/EditPreview/EditPreview";
-import TextField from "../../../components/TextField";
 import Button from "../../../components/Button";
 import preventUnloadEventHandler from "../../../utilities/preventUnloadEventHandler";
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_ROOT } from "./commonApi";
-import { CheckIn, CheckInEdits, Issue, IssueEdits } from "../types/issue";
+import { CheckIn, CheckInEdits } from "../types/issue";
 
 export async function getCheckInToday(labId: number): Promise<CheckIn> {
   // TODO: Abstract error handling here

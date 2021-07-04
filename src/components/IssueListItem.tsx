@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React from "react";
 import IssueStateIndicator from "./IssueStateIndicator";
 import { Link } from "react-router-dom";
 import { Issue } from "../types/issue";

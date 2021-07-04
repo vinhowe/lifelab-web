@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import React from "react";
 import PageWidth from "../../components/PageWidth";
 import Button from "../../components/Button";
 

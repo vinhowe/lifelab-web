@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React, { PropsWithChildren } from "react";
-import { matchPath, useHistory, useParams, useRouteMatch } from "react-router";
+import { PropsWithChildren } from "react";
+import { matchPath, useHistory, useRouteMatch } from "react-router";
 import { tabStyle } from "../../theme/styles";
 
 export interface LabNavTabProps {

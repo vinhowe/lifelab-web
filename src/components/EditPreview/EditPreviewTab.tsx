@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { tabStyle } from "../../theme/styles";
 
 // noinspection CssReplaceWithShorthandSafely

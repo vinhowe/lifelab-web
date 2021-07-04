@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import React from "react";
 import LabNavTab from "./LabNavTab";
 import { Link, useHistory } from "react-router-dom";
 import Button from "../Button";

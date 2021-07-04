@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { uppercaseFirst } from "../utilities/strings";
-import React from "react";
 
 const indicatorStyle = (small: boolean) => css`
   padding: ${small ? 6 : 8}px 12px;
