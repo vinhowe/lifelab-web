@@ -7,7 +7,7 @@ import { listItemContainerStyle } from "../theme/styles";
 
 export default function IssueListItem({
   issue: { title, state, number },
-  small,
+  small = false,
   labId,
 }: {
   issue: Issue;

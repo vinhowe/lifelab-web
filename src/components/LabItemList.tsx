@@ -6,7 +6,7 @@ import React from "react";
 export default function LabItemList<T>({
   items,
   children,
-  small,
+  small = false,
 }: {
   items: T[];
   children: (value: T, index: number, array: T[]) => React.ReactNode;
