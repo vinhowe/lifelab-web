@@ -86,6 +86,7 @@ export default function ReorderableIssueList({
                   )}
                 </Draggable>
               ))}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>
