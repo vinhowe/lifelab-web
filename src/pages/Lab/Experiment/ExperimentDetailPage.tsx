@@ -121,7 +121,11 @@ export default function ExperimentDetailPage(): JSX.Element {
           <div css={experimentHeadingContainerStyle}>
             {editing ? (
               <TextField
-                value={experimentEdits?.title || experiment.title}
+                value={
+                  experimentEdits?.title == null
+                    ? experiment.title
+                    : experimentEdits?.title
+                }
                 style={{ width: "100%" }}
                 onChange={(title) =>
                   title !== experiment.title &&

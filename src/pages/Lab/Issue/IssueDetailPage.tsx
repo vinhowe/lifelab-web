@@ -115,7 +115,9 @@ export default function IssueDetailPage(): JSX.Element {
           <div css={issueHeadingContainerStyle}>
             {editing ? (
               <TextField
-                value={issueEdits?.title || issue.title}
+                value={
+                  issueEdits?.title == null ? issue.title : issueEdits?.title
+                }
                 style={{ width: "100%" }}
                 onChange={(title) =>
                   title !== issue.title &&
