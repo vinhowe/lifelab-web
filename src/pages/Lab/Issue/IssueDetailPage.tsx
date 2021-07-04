@@ -16,6 +16,7 @@ import LabItemList from "../../../components/LabItemList";
 import { Experiment } from "../../../types/experiment";
 import { getExperiments } from "../../../services/experimentApi";
 import ExperimentListItem from "../../../components/ExperimentListItem";
+import Dialog from "../../../components/Dialog";
 
 const issueHeadingContainerStyle = css`
   display: flex;
@@ -53,6 +54,8 @@ export default function IssueDetailPage(): JSX.Element {
   const [issueEdits, setIssueEdits] = useState<IssueEdits>();
   const editing = issueEdits !== undefined;
   const [linkedExperiments, setLinkedExperiments] = useState<Experiment[]>();
+  const [linkedExperimentsDialogOpen, setLinkedExperimentsDialogOpen] =
+    useState(false);
 
   useEffect(() => {
     // TODO: Fix this incredibly inefficient way of doing things
@@ -73,6 +76,11 @@ export default function IssueDetailPage(): JSX.Element {
       setLinkedExperiments(newLinkedExperiments);
     },
     [issueNumber, labId]
+  );
+
+  const openLinkedExperimentsDialog = useCallback(
+    () => setLinkedExperimentsDialogOpen(true),
+    [setLinkedExperimentsDialogOpen]
   );
 
   const toggleEditing = async () => {
@@ -167,42 +175,54 @@ export default function IssueDetailPage(): JSX.Element {
               Created {new Date(issue.created).toDateString()}
             </span>
           </div>
-          {(linkedExperiments?.length || editing) && (
-            <h3>Linked experiments</h3>
-          )}
-          <div>
-            {linkedExperiments &&
-              (editing ? (
-                <LabItemChecklist
-                  loadItemsFn={getExperimentsCallback}
-                  selected={linkedExperiments}
-                  onSelectedChanged={async (items) => {
-                    await updateLinkedExperiements(items);
-                  }}
+          <h3>
+            <span
+              style={{
+                marginRight: "8px",
+              }}
+            >
+              Linked experiments
+            </span>
+            <Button onClick={openLinkedExperimentsDialog}>Edit</Button>
+          </h3>
+          {linkedExperiments && (
+            <div>
+              {
+                <Dialog
+                  onClose={() => setLinkedExperimentsDialogOpen(false)}
+                  open={linkedExperimentsDialogOpen}
                 >
-                  {(value, index) => (
-                    <ExperimentListItem
-                      key={index}
-                      experiment={value}
-                      labId={labId}
-                      small
-                    />
-                  )}
-                </LabItemChecklist>
-              ) : (
-                <LabItemList items={linkedExperiments}>
-                  {(value, index) => (
-                    <ExperimentListItem
-                      key={index}
-                      experiment={value}
-                      labId={labId}
-                      small
-                    />
-                  )}
-                </LabItemList>
-              ))}
-          </div>
-          {(editing || linkedExperiments?.length != 0) && <h3>Description</h3>}
+                  <LabItemChecklist
+                    loadItemsFn={getExperimentsCallback}
+                    selected={linkedExperiments}
+                    onSelectedChanged={async (items) => {
+                      await updateLinkedExperiments(items);
+                    }}
+                  >
+                    {(value, index) => (
+                      <ExperimentListItem
+                        key={index}
+                        experiment={value}
+                        labId={labId}
+                        small
+                      />
+                    )}
+                  </LabItemChecklist>
+                </Dialog>
+              }
+              <LabItemList items={linkedExperiments}>
+                {(value, index) => (
+                  <ExperimentListItem
+                    key={index}
+                    experiment={value}
+                    labId={labId}
+                    small
+                  />
+                )}
+              </LabItemList>
+            </div>
+          )}
+          <h3>Description</h3>
           {editing ? (
             <EditPreview
               value={issueEdits?.description || issue.description}

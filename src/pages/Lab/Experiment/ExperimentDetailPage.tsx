@@ -20,6 +20,7 @@ import { Issue } from "../../../types/issue";
 import LabItemChecklist from "../../../components/LabItemChecklist";
 import IssueListItem from "../../../components/IssueListItem";
 import LabItemList from "../../../components/LabItemList";
+import Dialog from "../../../components/Dialog";
 
 const experimentHeadingContainerStyle = css`
   display: flex;
@@ -57,6 +58,7 @@ export default function ExperimentDetailPage(): JSX.Element {
   const [experimentEdits, setExperimentEdits] = useState<ExperimentEdits>();
   const editing = experimentEdits !== undefined;
   const [linkedIssues, setLinkedIssues] = useState<Issue[]>();
+  const [linkedIssuesDialogOpen, setLinkedIssuesDialogOpen] = useState(false);
 
   useEffect(() => {
     // TODO: Fix this incredibly inefficient way of doing things
@@ -75,6 +77,11 @@ export default function ExperimentDetailPage(): JSX.Element {
       setLinkedIssues(newLinkedIssues);
     },
     [experimentNumber, labId]
+  );
+
+  const openLinkedIssuesDialog = useCallback(
+    () => setLinkedIssuesDialogOpen(true),
+    [setLinkedIssuesDialogOpen]
   );
 
   const toggleEditing = async () => {
@@ -169,39 +176,53 @@ export default function ExperimentDetailPage(): JSX.Element {
               </span>
             )}
           </div>
-          {(linkedIssues?.length || editing) && <h3>Linked issues</h3>}
-          <div>
-            {linkedIssues &&
-              (editing ? (
-                <LabItemChecklist
-                  loadItemsFn={getIssuesCallback}
-                  selected={linkedIssues}
-                  onSelectedChanged={async (items) => {
-                    await updateLinkedIssues(items);
-                  }}
+          <h3>
+            <span
+              style={{
+                marginRight: "8px",
+              }}
+            >
+              Linked issues
+            </span>
+            <Button onClick={openLinkedIssuesDialog}>Edit</Button>
+          </h3>
+          {linkedIssues && (
+            <div>
+              {
+                <Dialog
+                  onClose={() => setLinkedIssuesDialogOpen(false)}
+                  open={linkedIssuesDialogOpen}
                 >
-                  {(value, index) => (
-                    <IssueListItem
-                      key={index}
-                      issue={value}
-                      labId={labId}
-                      small
-                    />
-                  )}
-                </LabItemChecklist>
-              ) : (
-                <LabItemList items={linkedIssues}>
-                  {(value, index) => (
-                    <IssueListItem
-                      key={index}
-                      issue={value}
-                      labId={labId}
-                      small
-                    />
-                  )}
-                </LabItemList>
-              ))}
-          </div>
+                  <LabItemChecklist
+                    loadItemsFn={getIssuesCallback}
+                    selected={linkedIssues}
+                    onSelectedChanged={async (items) => {
+                      await updateLinkedIssues(items);
+                    }}
+                  >
+                    {(value, index) => (
+                      <IssueListItem
+                        key={index}
+                        issue={value}
+                        labId={labId}
+                        small
+                      />
+                    )}
+                  </LabItemChecklist>
+                </Dialog>
+              }
+              <LabItemList items={linkedIssues}>
+                {(value, index) => (
+                  <IssueListItem
+                    key={index}
+                    issue={value}
+                    labId={labId}
+                    small
+                  />
+                )}
+              </LabItemList>
+            </div>
+          )}
           {editing && <h3>End date</h3>}
           {editing && (
             <TextField
