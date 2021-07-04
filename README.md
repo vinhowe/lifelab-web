@@ -1,6 +1,6 @@
 # lifelab-web
 
-<img width="400" src="https://user-images.githubusercontent.com/24789592/86419833-c0d9cb00-bc91-11ea-85a9-12d0310c55b3.png" />
+<img width="400" src="https://user-images.githubusercontent.com/24789592/124372829-a0e53a80-dc4a-11eb-896e-cac95a210291.png" />
 
 A self-improvement service. Currently just a toy. The big ideas are:
 
